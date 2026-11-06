@@ -1,1424 +1,3555 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vikram Singh | Full-Stack Developer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-/* 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vikram Singh | Full-Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* 
  * BILLION DOLLAR COMPANY - MIDNIGHT AURORA THEME
  * Highly optimized for 60fps performance without Three.js overhead
  */
 
-:root {
-  --bg: #090B10; /* Deep Midnight Blue/Grey */
-  --ink: #F8FAFC;
-  --muted: #94A3B8;
-  
-  /* Liquid Glass System (iOS Inspired) */
-  --glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-  --glass-bg-hover: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-  --glass-border: rgba(255, 255, 255, 0.06); 
-  --glass-highlight: rgba(255, 255, 255, 0.15);
-  --glass-blur: blur(64px) saturate(180%);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    :root {
+      --bg: #150B3E;
+      /* Vivid Twilight — saturated color field so clear glass visibly refracts */
+      --ink: #FFFFFF;
+      --muted: #F2F5FF;
+      /* Everything reads white — legibility first */
 
-  --accent-1: #0EA5E9; /* Electric Cyan */
-  --accent-2: #8B5CF6; /* Violet */
-  --accent-3: #EC4899; /* Pink */
-}
+      /* Liquid Glass System — exact Apple spec: crystal-clear refraction, zero frosted blur, no black smoke */
+      --glass-bg: linear-gradient(145deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.04) 48%, rgba(255,255,255,0.12) 100%);
+      --glass-bg-hover: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0.08));
+      --glass-border: rgba(255,255,255,0.22);
+      --glass-highlight: rgba(255,255,255,0.35);
+      --glass-edge: rgba(255,255,255,0.2);
+      /* Apple liquid glass is CLEAR — light passes through saturated & gently lifted, never blurred */
+      --glass-blur: saturate(180%) brightness(1.15);
+      --glass-shadow: inset 0 1px 0 rgba(255,255,255,0.32), inset 0 -1px 0 rgba(255,255,255,0.08), inset 1px 0 0 rgba(255,255,255,0.12), inset -1px 0 0 rgba(255,255,255,0.12);
 
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+      --accent-1: #7DD3FC;
+      /* Luminous Sky */
+      --accent-2: #C4B5FD;
+      /* Luminous Violet */
+      --accent-3: #F9A8D4;
+      /* Luminous Pink */
+    }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-::-webkit-scrollbar {
-  display: none;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-html, body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    ::-webkit-scrollbar {
+      display: none;
+    }
 
-html.lenis, html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
+    /* Hide scrollbar for IE, Edge and Firefox */
+    html,
+    body {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
 
-body {
-  background-color: var(--bg);
-  color: var(--ink);
-  font-family: 'Figtree', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+    html.lenis,
+    html.lenis body {
+      height: auto;
+    }
 
-/* 
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    .lenis.lenis-smooth iframe {
+      pointer-events: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Figtree', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 
  * CONTINUOUS ANIMATIONS
  */
-@keyframes floatY {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes floatX {
-  0% { transform: translateX(0px); }
-  50% { transform: translateX(10px); }
-  100% { transform: translateX(0px); }
-}
-@keyframes pulseGlow {
-  0% { box-shadow: 0 0 10px rgba(14, 165, 233, 0.2); }
-  50% { box-shadow: 0 0 30px rgba(14, 165, 233, 0.6); }
-  100% { box-shadow: 0 0 10px rgba(14, 165, 233, 0.2); }
-}
-@keyframes scaleBreathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-@keyframes chatBubble {
-  0% { opacity: 0; transform: translateY(10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  80% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 0; }
-}
-@keyframes barRise {
-  0% { height: 10%; }
-  50% { height: 95%; }
-  100% { height: 10%; }
-}
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+    @keyframes floatY {
+      0% {
+        transform: translateY(0px);
+      }
 
-.anim-float { animation: floatY 4s ease-in-out infinite; }
-.anim-float-rev { animation: floatY 5s ease-in-out infinite reverse; }
-.anim-pulse { animation: pulseGlow 3s infinite; }
-.anim-breathe { animation: scaleBreathe 8s ease-in-out infinite; }
-.anim-spin { animation: spinSlow 20s linear infinite; }
+      50% {
+        transform: translateY(-15px);
+      }
 
-.chat-bubble-1 { animation: chatBubble 6s infinite 0s; opacity: 0; }
-.chat-bubble-2 { animation: chatBubble 6s infinite 3s; opacity: 0; }
-.risk-bar-1 { animation: barRise 3s ease-in-out infinite 0s; }
-.risk-bar-2 { animation: barRise 3s ease-in-out infinite 0.3s; }
-.risk-bar-3 { animation: barRise 3s ease-in-out infinite 0.6s; }
+      100% {
+        transform: translateY(0px);
+      }
+    }
 
-/* 
+    @keyframes floatX {
+      0% {
+        transform: translateX(0px);
+      }
+
+      50% {
+        transform: translateX(10px);
+      }
+
+      100% {
+        transform: translateX(0px);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+      }
+
+      100% {
+        box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+      }
+    }
+
+    @keyframes scaleBreathe {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes chatBubble {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      10% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      80% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      90% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes barRise {
+      0% {
+        height: 10%;
+      }
+
+      50% {
+        height: 95%;
+      }
+
+      100% {
+        height: 10%;
+      }
+    }
+
+    @keyframes spinSlow {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .anim-float {
+      animation: floatY 4s ease-in-out infinite;
+    }
+
+    .anim-float-rev {
+      animation: floatY 5s ease-in-out infinite reverse;
+    }
+
+    .anim-pulse {
+      animation: pulseGlow 3s infinite;
+    }
+
+    .anim-breathe {
+      animation: scaleBreathe 8s ease-in-out infinite;
+    }
+
+    .anim-spin {
+      animation: spinSlow 20s linear infinite;
+    }
+
+    .chat-bubble-1 {
+      animation: chatBubble 6s infinite 0s;
+      opacity: 0;
+    }
+
+    .chat-bubble-2 {
+      animation: chatBubble 6s infinite 3s;
+      opacity: 0;
+    }
+
+    .risk-bar-1 {
+      animation: barRise 3s ease-in-out infinite 0s;
+    }
+
+    .risk-bar-2 {
+      animation: barRise 3s ease-in-out infinite 0.3s;
+    }
+
+    .risk-bar-3 {
+      animation: barRise 3s ease-in-out infinite 0.6s;
+    }
+
+    /* 
  * SCARY LOADER
  */
-#hacker-loader {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(9, 11, 16, 0.7);
-  backdrop-filter: blur(50px) saturate(150%);
-  -webkit-backdrop-filter: blur(50px) saturate(150%);
-  background-image: radial-gradient(circle at center, rgba(14, 165, 233, 0.05) 0%, rgba(0,0,0,0.8) 100%);
-  color: var(--accent-1); /* Electric Cyan instead of basic green */
-  z-index: 9999999;
-  display: flex;
-  flex-direction: column-reverse;
-  padding: 4vw;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(0.9rem, 2vw, 1.2rem);
-  overflow: hidden;
-  transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), backdrop-filter 1.5s;
-  box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
-}
-#hacker-loader::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(14, 165, 233, 0.05),
-    rgba(14, 165, 233, 0.05) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-.loader-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-.terminal {
-  max-width: 900px;
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-@keyframes textFlicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-  20%, 22%, 24%, 55% { opacity: 0.2; }
-}
+    #hacker-loader {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(10, 14, 40, 0.55);
+      backdrop-filter: saturate(160%);
+      -webkit-backdrop-filter: saturate(160%);
+      background-image: radial-gradient(circle at center, rgba(14, 165, 233, 0.05) 0%, rgba(2, 4, 20, 0.6) 100%);
+      color: var(--accent-1);
+      /* Electric Cyan instead of basic green */
+      z-index: 9999999;
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 4vw;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      overflow: hidden;
+      transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1);
+      box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.55);
+    }
 
-@keyframes textGlitch {
-  0% { transform: translate(0); text-shadow: 0 0 10px #FF003C; }
-  20% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0EA5E9, -2px 0 #FF003C; }
-  40% { transform: translate(2px, -1px); text-shadow: -2px 0 #0EA5E9, 2px 0 #FF003C; }
-  60% { transform: translate(-1px, 2px); text-shadow: 2px 0 #0EA5E9, -2px 0 #FF003C; }
-  80% { transform: translate(1px, -2px); text-shadow: -2px 0 #0EA5E9, 2px 0 #FF003C; }
-  100% { transform: translate(0); text-shadow: 0 0 10px #FF003C; }
-}
+    #hacker-loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg,
+          rgba(14, 165, 233, 0.05),
+          rgba(14, 165, 233, 0.05) 1px,
+          transparent 1px,
+          transparent 2px);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-#log-container p {
-  margin: 0.3rem 0;
-  color: #ccc;
-  font-size: inherit;
-  line-height: 1.4;
-  text-shadow: 0 0 5px rgba(255,255,255,0.2);
-}
-#log-container p.success { color: #0EA5E9; text-shadow: 0 0 10px #0EA5E9; }
-#log-container p.error { 
-  color: #FF003C; 
-  font-weight: 800; 
-  letter-spacing: 1px; 
-  animation: textGlitch 0.2s infinite; 
-}
-#log-container p.warning { 
-  color: #F59E0B; 
-  text-shadow: 0 0 10px #F59E0B; 
-  animation: textFlicker 2s infinite; 
-}
+    .loader-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-.cursor-blink {
-  animation: blink 1s step-end infinite;
-  display: inline-block;
-  width: 12px;
-  height: 1.2em;
-  background: var(--ink);
-  vertical-align: middle;
-  margin-left: 5px;
-}
-@keyframes blink { 50% { opacity: 0; } }
+    .terminal {
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
 
-/* Glitch Effect */
-.glitch-overlay {
-  position: absolute; inset: 0; 
-  background: rgba(255,0,0,0.1); 
-  mix-blend-mode: overlay; 
-  opacity: 0; pointer-events: none; z-index: 10;
-}
-.glitch-active {
-  animation: glitch-flash 0.1s infinite;
-}
-@keyframes glitch-flash {
-  0% { opacity: 0; transform: translate(0); filter: hue-rotate(0deg); }
-  50% { opacity: 1; transform: translate(-10px, 10px); filter: hue-rotate(90deg) invert(1); background: rgba(255,0,60,0.3);}
-  100% { opacity: 0; transform: translate(10px, -10px); filter: hue-rotate(0deg); }
-}
+    @keyframes textFlicker {
 
-/* 
+      0%,
+      19%,
+      21%,
+      23%,
+      25%,
+      54%,
+      56%,
+      100% {
+        opacity: 1;
+      }
+
+      20%,
+      22%,
+      24%,
+      55% {
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes textGlitch {
+      0% {
+        transform: translate(0);
+        text-shadow: 0 0 10px #FF003C;
+      }
+
+      20% {
+        transform: translate(-2px, 1px);
+        text-shadow: 2px 0 #0EA5E9, -2px 0 #FF003C;
+      }
+
+      40% {
+        transform: translate(2px, -1px);
+        text-shadow: -2px 0 #0EA5E9, 2px 0 #FF003C;
+      }
+
+      60% {
+        transform: translate(-1px, 2px);
+        text-shadow: 2px 0 #0EA5E9, -2px 0 #FF003C;
+      }
+
+      80% {
+        transform: translate(1px, -2px);
+        text-shadow: -2px 0 #0EA5E9, 2px 0 #FF003C;
+      }
+
+      100% {
+        transform: translate(0);
+        text-shadow: 0 0 10px #FF003C;
+      }
+    }
+
+    #log-container p {
+      margin: 0.3rem 0;
+      color: #ccc;
+      font-size: inherit;
+      line-height: 1.4;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+
+    #log-container p.success {
+      color: #0EA5E9;
+      text-shadow: 0 0 10px #0EA5E9;
+    }
+
+    #log-container p.error {
+      color: #FF003C;
+      font-weight: 800;
+      letter-spacing: 1px;
+      animation: textGlitch 0.2s infinite;
+    }
+
+    #log-container p.warning {
+      color: #F59E0B;
+      text-shadow: 0 0 10px #F59E0B;
+      animation: textFlicker 2s infinite;
+    }
+
+    .cursor-blink {
+      animation: blink 1s step-end infinite;
+      display: inline-block;
+      width: 12px;
+      height: 1.2em;
+      background: var(--ink);
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Glitch Effect */
+    .glitch-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 0, 0, 0.1);
+      mix-blend-mode: overlay;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .glitch-active {
+      animation: glitch-flash 0.1s infinite;
+    }
+
+    @keyframes glitch-flash {
+      0% {
+        opacity: 0;
+        transform: translate(0);
+        filter: hue-rotate(0deg);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-10px, 10px);
+        filter: hue-rotate(90deg) invert(1);
+        background: rgba(255, 0, 60, 0.3);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(10px, -10px);
+        filter: hue-rotate(0deg);
+      }
+    }
+
+    /* 
  * 1. LIQUID BACKGROUND
  */
-.liquid-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  overflow: hidden;
-  background: var(--bg);
-}
-.blob {
-  position: absolute;
-  filter: blur(120px);
-  border-radius: 50%;
-  opacity: 0.35; 
-  mix-blend-mode: screen;
-  will-change: transform;
-  animation: float 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-}
-.blob-1 { width: 70vw; height: 70vw; background: var(--accent-1); top: -20%; left: -10%; animation-delay: 0s; }
-.blob-2 { width: 60vw; height: 60vw; background: var(--accent-2); bottom: -10%; right: -20%; animation-delay: -5s; }
-.blob-3 { width: 50vw; height: 50vw; background: var(--accent-3); top: 30%; left: 30%; animation-delay: -10s; }
+    .liquid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background:
+        radial-gradient(1200px 780px at 78% -6%, rgba(236, 72, 153, 0.34), transparent 62%),
+        radial-gradient(1000px 700px at 6% 104%, rgba(34, 211, 238, 0.3), transparent 62%),
+        radial-gradient(1100px 780px at 50% 55%, rgba(168, 85, 247, 0.24), transparent 65%),
+        linear-gradient(160deg, #150B3E 0%, #2A1055 34%, #43197B 58%, #0E2E5C 100%);
+    }
 
-/* 
+    /* -- Aurora blobs hold a constant glow — velocity-pumped opacity reads as flicker -- */
+    .blob {
+      position: absolute;
+      filter: blur(120px);
+      border-radius: 50%;
+      opacity: 0.35;
+      mix-blend-mode: screen;
+      will-change: transform;
+      animation: float 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blob-1 {
+      width: 70vw;
+      height: 70vw;
+      background: var(--accent-1);
+      top: -20%;
+      left: -10%;
+      animation-delay: 0s;
+    }
+
+    .blob-2 {
+      width: 60vw;
+      height: 60vw;
+      background: var(--accent-2);
+      bottom: -10%;
+      right: -20%;
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      width: 50vw;
+      height: 50vw;
+      background: var(--accent-3);
+      top: 30%;
+      left: 30%;
+      animation-delay: -10s;
+    }
+
+    /* 
  * 2. GLASSMORPHISM UTILITIES 
  */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-top: 1px solid var(--glass-highlight);
-  border-left: 1px solid var(--glass-highlight);
-  box-shadow: var(--glass-shadow);
-  border-radius: 24px;
-}
+    .glass {
+      position: relative;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 24px;
+    }
 
-/* 
+    /* Apple "liquid" specular rim — a 1px grazing-light edge, brighter top-left,
+       faint bounce bottom-right. Sits exactly over the border via masked padding. */
+    .glass::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(255, 255, 255, 0.1) 24%,
+        transparent 46%,
+        transparent 64%,
+        rgba(255, 255, 255, 0.24) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* 
  * 3. INTERACTIVE CURSOR 
  */
-.cursor-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 8px; height: 8px;
-  background: var(--ink);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-}
-.cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 40px; height: 40px;
-  border: 1px solid rgba(14, 165, 233, 0.4);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
-  backdrop-filter: blur(4px);
-}
-@media (max-width: 1024px) {
-  .cursor-dot, .cursor-ring { display: none; }
-}
+    .cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background: var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+    }
 
-/* 
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(14, 165, 233, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+    }
+
+    @media (max-width: 1024px) {
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+    }
+
+    /* 
  * 4. TYPOGRAPHY 
  */
-h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; font-weight: 800; line-height: 1.1; margin: 0; }
-h1 { font-size: clamp(3.5rem, 8vw, 7.5rem); letter-spacing: -0.05em; }
-h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -0.04em; margin-bottom: 2rem; }
-h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); margin-bottom: 1rem; }
-p { color: var(--muted); font-size: clamp(1rem, 2vw, 1.15rem); margin-bottom: 1.5rem; max-width: 65ch; }
-.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-1); }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+    }
 
-.text-gradient {
-  background: linear-gradient(135deg, #FFFFFF, var(--muted));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.text-accent {
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    h1 {
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      letter-spacing: -0.05em;
+    }
 
-.reveal-hero { overflow: hidden; }
-.reveal-line-wrap { overflow: hidden; display: block; }
-.reveal-line { display: inline-block; }
+    h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+    }
 
-/* 
+    h3 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      margin-bottom: 1.5rem;
+      max-width: 65ch;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, var(--ink), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-accent {
+      background: linear-gradient(135deg, #8AE9FF, #D9C8FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .reveal-hero {
+      overflow: hidden;
+    }
+
+    .reveal-line-wrap {
+      overflow: hidden;
+      display: block;
+    }
+
+    .reveal-line {
+      display: inline-block;
+    }
+
+    /* 
  * 5. LAYOUT & SCENE 
  */
-.container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 4vw; perspective: 1500px; }
-section { min-height: 100vh; padding: 12vmax 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      perspective: 1500px;
+    }
 
-/* Navbar */
-nav {
-  position: fixed;
-  top: 2rem; left: 50%;
-  transform: translateX(-50%);
-  padding: 1rem 2rem;
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-  z-index: 100;
-  border-radius: 99px;
-  background: rgba(9, 11, 16, 0.6);
-  opacity: 0; /* Animated in JS */
-}
-nav a {
-  color: var(--ink);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: opacity 0.3s, color 0.3s;
-}
-nav a:hover { opacity: 0.7; color: var(--accent-1); }
-.nav-logo { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 1.2rem; }
+    section {
+      min-height: 100vh;
+      padding: 12vmax 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
 
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2.5rem;
-  border-radius: 99px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--ink);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s, background 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.btn.glass-btn {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-highlight);
-}
-.btn.glass-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-.btn.primary-btn {
-  background: var(--accent-1);
-  color: #000;
-  border: none;
-}
-.btn.primary-btn:hover {
-  background: #38bdf8; 
-  box-shadow: 0 0 25px rgba(14, 165, 233, 0.6);
-}
+    /* Navbar — compact pill */
+    nav {
+      position: fixed;
+      top: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.62rem 1.45rem;
+      display: flex;
+      gap: 1.55rem;
+      align-items: center;
+      z-index: 100;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.12);
+      opacity: 0;
+      /* Animated in JS */
+    }
 
-.hero-btns { display: flex; gap: 1.5rem; margin-top: 3rem; }
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.84rem;
+      letter-spacing: 0.01em;
+      transition: opacity 0.3s, color 0.3s;
+    }
 
-/* 
+    nav a:hover {
+      opacity: 0.7;
+      color: var(--accent-1);
+    }
+
+    .nav-logo {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    /* True pill + locked fixed — nav.glass outranks .glass (which pins relative for its rim) */
+    nav.glass {
+      position: fixed;
+      top: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 94vw;
+      border-radius: 99px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem;
+      border-radius: 99px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn.glass-btn {
+      background: var(--glass-bg);
+      backdrop-filter: saturate(180%) brightness(1.12);
+      -webkit-backdrop-filter: saturate(180%) brightness(1.12);
+      border: 1px solid var(--glass-highlight);
+    }
+
+    .btn.glass-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn.primary-btn {
+      background: var(--accent-1);
+      color: #000;
+      border: none;
+    }
+
+    .btn.primary-btn:hover {
+      background: #A8E4FF;
+      box-shadow: 0 0 25px rgba(14, 165, 233, 0.6);
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* 
  * 6. BENTO GRID SYSTEM 
  */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(180px, auto);
-  gap: 1.5rem;
-  margin-top: 4rem;
-}
-.bento-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-top: 1px solid var(--glass-highlight);
-  border-left: 1px solid var(--glass-highlight);
-  box-shadow: var(--glass-shadow);
-  border-radius: 24px;
-  padding: 2.5rem;
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s, background 0.4s;
-}
-.bento-col-3 { grid-column: span 3; }
-.bento-col-4 { grid-column: span 4; }
-.bento-col-5 { grid-column: span 5; }
-.bento-row-1 { grid-row: span 1; }
-.bento-row-2 { grid-row: span 2; }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(180px, auto);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
 
-.bento-hover:hover {
-  transform: translateY(-4px) scale(1.01);
-  background: var(--glass-bg-hover);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-}
+    .bento-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-edge);
+      border-left: 1px solid var(--glass-edge);
+      box-shadow: var(--glass-shadow);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s, background 0.4s;
+    }
 
-.tech-pill {
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 99px;
-  font-size: 0.85rem;
-  color: var(--muted);
-  transition: color 0.3s, border-color 0.3s, transform 0.3s;
-}
-.tech-pill:hover {
-  color: var(--ink);
-  border-color: var(--accent-1);
-  transform: translateY(-3px);
-}
+    .bento-col-3 {
+      grid-column: span 3;
+    }
 
-/* Projects */
-.project-card {
-  padding: 4rem;
-  margin-bottom: 4rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-.project-tags {
-  display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 2rem 0;
-}
-.project-tags span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1.2rem;
-  border-radius: 99px;
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 0.85rem;
-  backdrop-filter: blur(8px);
-  transition: background 0.3s, border-color 0.3s, transform 0.3s;
-}
-.project-tags span:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent-1);
-  transform: scale(1.05);
-}
+    .bento-col-4 {
+      grid-column: span 4;
+    }
 
-.magnetic { display: inline-block; }
+    .bento-col-5 {
+      grid-column: span 5;
+    }
 
-.line { overflow: hidden; padding-bottom: 0.1em; }
-.word { transform-origin: bottom left; }
+    .bento-row-1 {
+      grid-row: span 1;
+    }
 
-@media (max-width: 1024px) {
-  .project-card { grid-template-columns: 1fr; padding: 2rem; }
-  .bento-col-3, .bento-col-4, .bento-col-5 { grid-column: span 12; }
-  nav { width: 90%; justify-content: space-between; gap: 1rem; }
-  .nav-links { display: none; }
-}
+    .bento-row-2 {
+      grid-row: span 2;
+    }
 
-/* 
+    .bento-hover:hover {
+      transform: translateY(-4px) scale(1.01);
+      background: var(--glass-bg-hover);
+      border-color: rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 24px rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-pill {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 99px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .tech-pill:hover {
+      color: var(--ink);
+      border-color: var(--accent-1);
+      transform: translateY(-3px);
+    }
+
+    /* Projects */
+    .project-card {
+      padding: 4rem;
+      margin-bottom: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .project-tags span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1.2rem;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.85rem;
+      backdrop-filter: saturate(180%);
+      -webkit-backdrop-filter: saturate(180%);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .project-tags span:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-1);
+      transform: scale(1.05);
+    }
+
+    .magnetic {
+      display: inline-block;
+    }
+
+    .line {
+      overflow: hidden;
+      padding-bottom: 0.1em;
+    }
+
+    .word {
+      transform-origin: bottom left;
+    }
+
+    @media (max-width: 1024px) {
+      .project-card {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+
+      .bento-col-3,
+      .bento-col-4,
+      .bento-col-5 {
+        grid-column: span 12;
+      }
+
+      nav {
+        justify-content: space-between;
+        gap: 0.8rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* 
  * 7. MOTION SYSTEM II — LENIS VELOCITY LAYER
  */
 
-/* -- Scroll Progress Beam -- */
-.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1000; pointer-events: none; }
-.scroll-progress span {
-  display: block; height: 100%;
-  transform: scaleX(0); transform-origin: 0 50%;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
-  box-shadow: 0 0 14px rgba(14, 165, 233, 0.65);
-  will-change: transform;
-}
+    /* -- Scroll Progress Beam -- */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 1000;
+      pointer-events: none;
+    }
 
-/* -- Cinematic Film Grain -- */
-.noise-overlay {
-  position: fixed; inset: -10%;
-  z-index: 3; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  animation: grainShift 0.8s steps(3) infinite;
-}
-@keyframes grainShift {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(-2%, 1.5%); }
-  66% { transform: translate(2%, -2%); }
-}
+    .scroll-progress span {
+      display: block;
+      height: 100%;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      box-shadow: 0 0 14px rgba(14, 165, 233, 0.65);
+      will-change: transform;
+    }
 
-/* -- Spotlight Cursor Glow on Cards -- */
-.spot { position: relative; }
-.spot::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 0;
-  border-radius: inherit;
-  background: radial-gradient(540px circle at var(--mx, 50%) var(--my, 0%), rgba(14, 165, 233, 0.13), rgba(139, 92, 246, 0.07) 45%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-.spot:hover::before { opacity: 1; }
+    /* -- Cinematic Film Grain (static — animated grain strobes over clear glass) -- */
+    .noise-overlay {
+      position: fixed;
+      inset: -10%;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.04;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
 
-/* -- Light Sheen Sweep on Buttons -- */
-.btn::after {
-  content: '';
-  position: absolute; top: -10%; left: -130%;
-  width: 55%; height: 120%;
-  transform: skewX(-22deg);
-  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.38), transparent);
-  transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn:hover::after { left: 160%; }
-.btn.primary-btn::after { background: linear-gradient(115deg, transparent, rgba(0, 0, 0, 0.35), transparent); }
+    @keyframes grainShift {
 
-/* -- Nav Micro Motion -- */
-nav a { position: relative; }
-nav { transition: opacity 0.5s; }
-nav.scrolled { background: rgba(9, 11, 16, 0.85); box-shadow: 0 14px 44px rgba(0, 0, 0, 0.5); }
-nav a:not(.nav-logo)::after {
-  content: '';
-  position: absolute; left: 0; bottom: -7px;
-  width: 100%; height: 1.5px; border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  transform: scaleX(0); transform-origin: right;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-nav a:not(.nav-logo):hover::after { transform: scaleX(1); transform-origin: left; }
-nav a:not(.nav-logo):hover { opacity: 1; }
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
 
-/* -- Kinetic Marquee -- */
-.marquee-strip { position: relative; z-index: 1; padding: 3rem 0; transform: rotate(-1.5deg) scale(1.04); margin: 0 -1vw; }
-.marquee-row {
-  display: flex; overflow: hidden; padding: 1.4rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%, transparent 70%, rgba(255,255,255,0.02));
-}
-.marquee-row + .marquee-row { border-top: none; }
-.marquee-track { display: flex; flex-shrink: 0; min-width: max-content; will-change: transform; }
-.marquee-track span {
-  font-family: 'Unbounded', sans-serif; font-weight: 800;
-  font-size: clamp(1.5rem, 3.6vw, 3.2rem);
-  line-height: 1.1; white-space: nowrap; text-transform: uppercase;
-  margin-right: 3.5rem;
-}
-.marquee-fill {
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.marquee-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(248, 250, 252, 0.3); }
+      33% {
+        transform: translate(-2%, 1.5%);
+      }
 
-/*-- Rotating Scroll Badge --*/
-.scroll-badge { position: absolute; bottom: 5vh; right: 6vw; width: 112px; height: 112px; display: grid; place-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
-.scroll-badge:hover { opacity: 1; }
-.scroll-badge .ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spinSlow 16s linear infinite; }
-.scroll-badge .ring text { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 2.4px; fill: rgba(248, 250, 252, 0.6); }
-.scroll-badge:hover .ring text { fill: var(--accent-1); }
-.scroll-badge .arrow-btn { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(10px); transition: transform 0.3s ease, background 0.3s, border-color 0.3s; }
-.scroll-badge:hover .arrow-btn { transform: translateY(4px); background: rgba(14, 165, 233, 0.12); border-color: rgba(14, 165, 233, 0.4); }
+      66% {
+        transform: translate(2%, -2%);
+      }
+    }
 
-/* -- Big Counter Numbers -- */
-.counter-num { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 4.5vw, 4rem); line-height: 1; letter-spacing: -0.03em; }
+    /* -- Spotlight Cursor Glow on Cards -- */
+    .spot {
+      position: relative;
+    }
 
-/* -- Back To Top -- */
-#toTop { position: fixed; bottom: 2.2rem; right: 2.2rem; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; z-index: 200; color: var(--ink); cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(24px) scale(0.85); transition: opacity 0.45s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
-#toTop.visible { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
-#toTop svg { transition: transform 0.3s ease; }
-#toTop:hover svg { transform: translateY(-4px); }
+    .spot::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: inherit;
+      background: radial-gradient(540px circle at var(--mx, 50%) var(--my, 0%), rgba(14, 165, 233, 0.13), rgba(139, 92, 246, 0.07) 45%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
 
-/* -- Cursor Ring Grow State -- */
-.cursor-ring.grow { width: 64px !important; height: 64px !important; background: rgba(139, 92, 246, 0.08) !important; border-color: rgba(139, 92, 246, 0.5) !important; }
+    .spot:hover::before {
+      opacity: 1;
+    }
 
-/* -- Living Gradient Catchlights -- */
-.text-accent { background-size: 200% 200%; animation: accentShift 7s ease-in-out infinite; }
-@keyframes accentShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    /* -- Light Sheen Sweep on Buttons -- */
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -130%;
+      width: 55%;
+      height: 120%;
+      transform: skewX(-22deg);
+      background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+      transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-@media (max-width: 1024px) {
-  .scroll-badge { display: none; }
-  .marquee-strip { transform: none; margin: 0; }
-}
-@media (max-width: 768px) {
-  #toTop { bottom: 1.4rem; right: 1.4rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .anim-float, .anim-float-rev, .anim-pulse, .anim-breathe, .anim-spin,
-  .chat-bubble-1, .chat-bubble-2, .risk-bar-1, .risk-bar-2, .risk-bar-3,
-  .noise-overlay, .scroll-badge .ring, .text-accent { animation: none !important; }
-}
-</style>
+    .btn:hover::after {
+      left: 160%;
+    }
+
+    .btn.primary-btn::after {
+      background: linear-gradient(115deg, transparent, rgba(0, 0, 0, 0.35), transparent);
+    }
+
+    /* -- Nav Micro Motion -- */
+    nav a {
+      position: relative;
+    }
+
+    nav {
+      transition: opacity 0.5s;
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.16);
+      box-shadow: var(--glass-shadow);
+    }
+
+    nav a:not(.nav-logo)::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 100%;
+      height: 1.5px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    nav a:not(.nav-logo):hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav a:not(.nav-logo):hover {
+      opacity: 1;
+    }
+
+    /* -- Kinetic Marquee -- */
+    .marquee-strip {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 0;
+      transform: rotate(-1.5deg) scale(1.04);
+      margin: 0 -1vw;
+    }
+
+    .marquee-row {
+      display: flex;
+      overflow: hidden;
+      padding: 1.4rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent 30%, transparent 70%, rgba(255, 255, 255, 0.02));
+    }
+
+    .marquee-row+.marquee-row {
+      border-top: none;
+    }
+
+    .marquee-track {
+      display: flex;
+      flex-shrink: 0;
+      min-width: max-content;
+      will-change: transform;
+    }
+
+    .marquee-track span {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3.6vw, 3.2rem);
+      line-height: 1.1;
+      white-space: nowrap;
+      text-transform: uppercase;
+      margin-right: 3.5rem;
+    }
+
+    .marquee-fill {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .marquee-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
+    }
+
+    /*-- Rotating Scroll Badge --*/
+    .scroll-badge {
+      position: absolute;
+      bottom: 5vh;
+      right: 6vw;
+      width: 112px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: opacity 0.3s;
+    }
+
+    .scroll-badge:hover {
+      opacity: 1;
+    }
+
+    .scroll-badge .ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      animation: spinSlow 16s linear infinite;
+    }
+
+    .scroll-badge .ring text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 2.4px;
+      fill: rgba(255, 255, 255, 0.9);
+    }
+
+    .scroll-badge:hover .ring text {
+      fill: var(--accent-1);
+    }
+
+    .scroll-badge .arrow-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: saturate(180%);
+      -webkit-backdrop-filter: saturate(180%);
+      transition: transform 0.3s ease, background 0.3s, border-color 0.3s;
+    }
+
+    .scroll-badge:hover .arrow-btn {
+      transform: translateY(4px);
+      background: rgba(14, 165, 233, 0.12);
+      border-color: rgba(14, 165, 233, 0.4);
+    }
+
+    /* -- Big Counter Numbers -- */
+    .counter-num {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    /* -- Back To Top -- */
+    #toTop {
+      position: fixed;
+      bottom: 2.2rem;
+      right: 2.2rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      z-index: 200;
+      color: var(--ink);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(24px) scale(0.85);
+      transition: opacity 0.45s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #toTop.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    #toTop svg.arrow {
+      transition: transform 0.3s ease;
+    }
+
+    #toTop:hover svg.arrow {
+      transform: translateY(-4px);
+    }
+
+    /* -- Circular scroll gauge hugging the back-to-top button -- */
+    #toTop .toTop-ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+
+    #toTop .toTop-ring circle {
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    #toTop .toTop-ring .track {
+      stroke: rgba(255, 255, 255, 0.14);
+    }
+
+    #toTop .toTop-ring .trace {
+      stroke: var(--accent-1);
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 4px rgba(125, 211, 252, 0.7));
+    }
+
+    /* -- Cursor Ring Grow State -- */
+    .cursor-ring.grow {
+      width: 64px !important;
+      height: 64px !important;
+      background: rgba(139, 92, 246, 0.08) !important;
+      border-color: rgba(139, 92, 246, 0.5) !important;
+    }
+
+    /* -- Living Gradient Catchlights -- */
+    .text-accent {
+      background-size: 200% 200%;
+      animation: accentShift 7s ease-in-out infinite;
+    }
+
+    @keyframes accentShift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .scroll-badge {
+        display: none;
+      }
+
+      .marquee-strip {
+        transform: none;
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #toTop {
+        bottom: 1.4rem;
+        right: 1.4rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .anim-float,
+      .anim-float-rev,
+      .anim-pulse,
+      .anim-breathe,
+      .anim-spin,
+      .chat-bubble-1,
+      .chat-bubble-2,
+      .risk-bar-1,
+      .risk-bar-2,
+      .risk-bar-3,
+      .noise-overlay,
+      .scroll-badge .ring,
+      .text-accent {
+        animation: none !important;
+      }
+    }
+
+    /*
+ * 8. LIQUID GLASS MODAL SYSTEM — iOS-26 style open/close choreography
+ */
+    #modal-root {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 4, 8, 0.35);
+      opacity: 0;
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .modal-backdrop.on {
+      opacity: 1;
+    }
+
+    /* Directional bloom that expands from the click origin */
+    .modal-bloom {
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.2);
+      background: radial-gradient(circle,
+        rgba(14, 165, 233, 0.32) 0%,
+        rgba(139, 92, 246, 0.16) 38%,
+        transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .modal-panel {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(940px, 92vw);
+      max-height: min(85vh, 880px);
+      border-radius: 32px;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.03) 48%, rgba(255, 255, 255, 0.08) 100%);
+      -webkit-backdrop-filter: saturate(180%) brightness(1.15);
+      backdrop-filter: saturate(180%) brightness(1.15);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(255, 255, 255, 0.08), inset 1px 0 0 rgba(255, 255, 255, 0.1), inset -1px 0 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform-origin: 50% 100%;
+      will-change: transform, opacity;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Same grazing-light rim as .glass, tuned brighter for the floating sheet */
+    .modal-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.65) 0%,
+        rgba(255, 255, 255, 0.08) 24%,
+        transparent 46%,
+        transparent 64%,
+        rgba(255, 255, 255, 0.22) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.15rem 1.3rem 1.15rem 1.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex: 0 0 auto;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .panel-title .mono {
+      color: var(--accent-1);
+      flex-shrink: 0;
+    }
+
+    .panel-title h3 {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--ink);
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s, border-color 0.3s;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 0, 60, 0.15);
+      border-color: rgba(255, 0, 60, 0.45);
+      transform: rotate(90deg);
+    }
+
+    .panel-body {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 2rem;
+      scrollbar-width: none;
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    .panel-body::-webkit-scrollbar {
+      display: none;
+    }
+
+    /*
+ * 8.1 CERTIFICATE SHEET — paper replica in glass
+ */
+    .cert-sheet {
+      --c: var(--accent-1);
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      border-radius: 26px;
+      padding: 3.2rem 3rem 2.4rem;
+      text-align: center;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.014) 60%, rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .cert-sheet.acc-2 {
+      --c: var(--accent-2);
+    }
+
+    .cert-sheet.acc-3 {
+      --c: var(--accent-3);
+    }
+
+    .cert-sheet::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(420px circle at 50% -20%, rgba(255, 255, 255, 0.07), transparent 65%);
+      pointer-events: none;
+    }
+
+    /* One-time sheen sweep when the sheet is revealed */
+    .cert-sheet::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -70%;
+      width: 55%;
+      transform: skewX(-18deg);
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      animation: certSheen 1.5s cubic-bezier(0.6, 0, 0.2, 1) 0.45s both;
+      pointer-events: none;
+    }
+
+    @keyframes certSheen {
+      to {
+        left: 135%;
+      }
+    }
+
+    .cert-seal {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 1.3rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.16), rgba(0, 0, 0, 0.42));
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+
+    .cert-seal::before {
+      content: '';
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(255, 255, 255, 0.28);
+      animation: spinSlow 26s linear infinite;
+    }
+
+    .cert-seal span {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--c);
+      text-shadow: 0 0 24px rgba(255, 255, 255, 0.25);
+    }
+
+    .cert-kicker {
+      color: var(--c);
+      margin-bottom: 0.6rem;
+      font-size: 0.78rem;
+    }
+
+    .cert-title {
+      font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+      margin-bottom: 0.7rem;
+    }
+
+    .cert-by {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 46ch;
+      margin: 0 auto 1.8rem;
+      line-height: 1.65;
+    }
+
+    .cert-by b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .cert-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .cert-chip {
+      padding: 0.45rem 1.1rem;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .cert-chip.grade {
+      color: var(--c);
+      border-color: transparent;
+      box-shadow: inset 0 0 0 1px var(--c);
+      font-weight: 700;
+    }
+
+    .cert-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cert-foot .mono {
+      opacity: 0.55;
+      font-size: 0.72rem;
+    }
+
+    @media (max-width: 640px) {
+      .cert-foot {
+        justify-content: center;
+      }
+
+      .cert-sheet {
+        padding: 2.4rem 1.5rem 1.8rem;
+      }
+    }
+
+    /*
+ * 8.2 RESUME — PDF.js liquid reader
+ */
+    .pdf-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .pdf-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.05rem;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pdf-pill:hover {
+      background: rgba(14, 165, 233, 0.14);
+      border-color: rgba(14, 165, 233, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .pdf-pill.primary {
+      background: var(--accent-1);
+      color: #04121c;
+      border-color: transparent;
+    }
+
+    .pdf-pill.primary:hover {
+      background: #38bdf8;
+      border-color: transparent;
+      box-shadow: 0 6px 24px rgba(14, 165, 233, 0.4);
+    }
+
+    .pdf-sep {
+      width: 1px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.12);
+      display: inline-block;
+    }
+
+    .pdf-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      min-width: 72px;
+      text-align: center;
+    }
+
+    .pdf-viewport {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 1.6rem;
+      max-height: 58vh;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+    }
+
+    .pdf-page {
+      width: 100%;
+      max-width: 720px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+      position: relative;
+    }
+
+    .pdf-page canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .pdf-page canvas.ready {
+      opacity: 1;
+    }
+
+    .pdf-pagelabel {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: rgba(10, 12, 16, 0.45);
+      z-index: 1;
+    }
+
+    .pdf-loading {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-1);
+      font-size: 0.85rem;
+      padding: 2rem 0;
+      animation: textFlicker 1.4s infinite;
+    }
+
+    .pdf-fallback {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .pdf-fallback iframe {
+      width: 100%;
+      height: 58vh;
+      border: 0;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .pdf-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 1.2rem;
+      text-align: center;
+    }
+
+    /*
+ * 8.3 BUTTON HYDRAULICS + FOCUS
+ */
+    .btn:active,
+    .pdf-pill:active,
+    .modal-close:active {
+      transform: scale(0.96) !important;
+    }
+
+    .btn:focus-visible,
+    .pdf-pill:focus-visible,
+    .modal-close:focus-visible {
+      outline: 2px solid var(--accent-1);
+      outline-offset: 3px;
+    }
+
+    /*
+ * 9. JOURNEY — scroll-lit flight path
+ */
+    .journey-note {
+      margin-bottom: 1rem;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 5rem;
+      padding: 1rem 0;
+    }
+
+    .rail {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .rail-fill {
+      position: absolute;
+      inset: 0;
+      transform: scaleY(0);
+      transform-origin: top center;
+      background: linear-gradient(180deg, var(--accent-1), var(--accent-2) 55%, var(--accent-3));
+      box-shadow: 0 0 18px rgba(14, 165, 233, 0.55);
+    }
+
+    .tl-item {
+      position: relative;
+      width: 50%;
+      padding: 1rem 4rem 4.5rem 0;
+    }
+
+    .tl-item[data-side="r"] {
+      left: 50%;
+      padding: 1rem 0 4.5rem 4rem;
+    }
+
+    .tl-item:last-child {
+      padding-bottom: 1rem;
+    }
+
+    .tl-item[data-side="l"] {
+      text-align: right;
+    }
+
+    .tl-item[data-side="l"] .tl-tags {
+      justify-content: flex-end;
+    }
+
+    .tl-node {
+      position: absolute;
+      top: 2.6rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(16, 23, 63, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      z-index: 2;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s, box-shadow 0.5s;
+    }
+
+    .tl-item[data-side="l"] .tl-node {
+      right: -10px;
+    }
+
+    .tl-item[data-side="r"] .tl-node {
+      left: -10px;
+    }
+
+    .tl-node::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: rgba(248, 250, 252, 0.15);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    .tl-item.lit .tl-node {
+      border-color: var(--accent-1);
+      transform: scale(1.25);
+      box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.08), 0 0 24px rgba(14, 165, 233, 0.5);
+    }
+
+    .tl-item.lit .tl-node::after {
+      background: var(--accent-1);
+      box-shadow: 0 0 10px var(--accent-1);
+    }
+
+    .tl-when {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.18em;
+    }
+
+    .tl-when b {
+      color: var(--accent-1);
+      font-weight: 700;
+    }
+
+    .tl-card {
+      padding: 1.8rem 2rem;
+      position: relative;
+    }
+
+    .tl-card h3 {
+      font-size: 1.25rem;
+      margin: 0 0 0.6rem;
+    }
+
+    .tl-card p {
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .tl-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tl-tags span,
+    .tl-tags a {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.8rem;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+      text-decoration: none;
+    }
+
+    @media (max-width: 1024px) {
+      .rail {
+        left: 10px;
+      }
+
+      .tl-item,
+      .tl-item[data-side="r"] {
+        width: 100%;
+        left: 0;
+        padding: 1rem 0 3.2rem 2.8rem;
+        text-align: left;
+      }
+
+      .tl-item[data-side="l"] .tl-tags {
+        justify-content: flex-start;
+      }
+
+      .tl-item[data-side="l"] .tl-node,
+      .tl-item[data-side="r"] .tl-node {
+        left: 10px;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .tl-item.lit .tl-node {
+        transform: translateX(-50%) scale(1.2);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .cert-sheet::after,
+      .cert-seal::before,
+      .pdf-loading {
+        animation: none !important;
+      }
+    }
+
+    /*
+ * 10. MOTION LAYER III — SCROLL CHOREOGRAPHY
+ */
+
+    /* -- Active section pill: a glass lozenge that glides between nav links -- */
+    .nav-links {
+      position: relative;
+    }
+
+    .nav-pill {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      height: 31px;
+      margin-top: -15.5px;
+      width: 0;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 18px rgba(125, 211, 252, 0.12);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform, width;
+    }
+
+    .nav-links a {
+      z-index: 1;
+    }
+
+    .nav-links a.is-active {
+      color: #fff;
+      opacity: 1;
+    }
+
+    /* -- Scroll-lit copy: words brighten as the paragraph travels up the viewport -- */
+    .scrub-lit .word {
+      will-change: opacity;
+    }
+
+    /* -- Journey rail spark: a comet head riding the lit path -- */
+    .rail-spark {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: #F2FAFF;
+      box-shadow: 0 0 12px 3px rgba(125, 211, 252, 0.8), 0 0 44px 14px rgba(196, 181, 253, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 3;
+      will-change: top;
+    }
+
+    .rail-spark.on {
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .rail-spark {
+        left: 10px;
+      }
+    }
+
+    /* -- Project visuals: 3D tilt + light that follows the pointer -- */
+    .project-visual.tiltable {
+      overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .project-visual.tiltable::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.05) 38%,
+        transparent 66%);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .project-visual.tiltable:hover::after {
+      opacity: 1;
+    }
+
+  </style>
 </head>
+
 <body>
 
-<!-- Scroll Progress Beam -->
-<div class="scroll-progress"><span id="progress-bar"></span></div>
+  <!-- Scroll Progress Beam -->
+  <div class="scroll-progress"><span id="progress-bar"></span></div>
 
-<!-- Loader Screen -->
-<div id="hacker-loader">
-  <div class="glitch-overlay" id="glitch-layer"></div>
-  <div class="terminal">
-    <div id="log-container"></div>
-    <div style="display: flex;"><span class="cursor-blink"></span></div>
-  </div>
-</div>
-
-<!-- Liquid Glass Background -->
-<div class="liquid-bg">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-</div>
-<div class="noise-overlay"></div>
-
-<!-- 3D Background Object -->
-<canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;"></canvas>
-
-<!-- Custom Cursor -->
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
-
-<!-- Navigation -->
-<nav id="main-nav" class="glass magnetic-container">
-  <a href="#" class="nav-logo magnetic">VS.</a>
-  <div class="nav-links" style="display: flex; gap: 2rem;">
-    <a href="#profile" class="magnetic">About</a>
-    <a href="#projects" class="magnetic">Projects</a>
-    <a href="#certificates" class="magnetic">Certificates</a>
-  </div>
-  <a href="https://docs.google.com/document/d/1XPWmjBpT9VAv2XP0i6pFRkJR-Y_n2NbN/edit?usp=sharing&ouid=112699414269592164020&rtpof=true&sd=true" target="_blank" class="magnetic" style="font-weight: 800; color: var(--accent-1);">Resume</a>
-</nav>
-
-<!-- Hero Section -->
-<section class="container" style="min-height: 100vh; padding-top: 15vh;">
-  <div class="hero-content" style="max-width: 900px;">
-    <div class="mono reveal-text" style="margin-bottom: 2rem;">Full-stack developer & Architect</div>
-    
-    <h1 class="reveal-hero">
-      <span class="reveal-line-wrap"><span class="reveal-line">Building <span class="text-accent">digital</span></span></span>
-      <span class="reveal-line-wrap"><span class="reveal-line">experiences that feel <span class="text-gradient">alive.</span></span></span>
-    </h1>
-    
-    <p class="reveal-text" style="margin-top: 2rem; font-size: clamp(1.2rem, 2vw, 1.5rem);">I engineer secure, real-time web applications—live chat, streaming AI, and robust authentication—crafted with the precision of a senior architect.</p>
-    
-    <div class="hero-btns gsap-btn-stagger">
-      <div class="magnetic-container"><a href="#projects" class="btn primary-btn magnetic">Explore Work</a></div>
-      <div class="magnetic-container"><a href="https://docs.google.com/document/d/1XPWmjBpT9VAv2XP0i6pFRkJR-Y_n2NbN/edit?usp=sharing&ouid=112699414269592164020&rtpof=true&sd=true" target="_blank" class="btn glass-btn magnetic">View Resume</a></div>
+  <!-- Loader Screen -->
+  <div id="hacker-loader">
+    <div class="glitch-overlay" id="glitch-layer"></div>
+    <div class="terminal">
+      <div id="log-container"></div>
+      <div style="display: flex;"><span class="cursor-blink"></span></div>
     </div>
   </div>
 
-  <a href="#profile" class="scroll-badge" aria-label="Scroll to profile">
-    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><path id="badgeCircle" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"/></defs>
-      <text><textPath href="#badgeCircle">SCROLL TO EXPLORE &#10022; OPEN TO WORK &#10022;</textPath></text>
-    </svg>
-    <span class="arrow-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg></span>
-  </a>
-</section>
-
-<!-- Personal Details & CV Section -->
-<section id="profile" class="container" style="padding-top: 15vh;">
-  <div class="mono reveal-text" style="color: var(--accent-1); margin-bottom: 2rem;">Profile & Expertise</div>
-  <h2 class="reveal-hero" style="margin-bottom: 2rem;">
-    <span class="reveal-line-wrap"><span class="reveal-line">The <span class="text-accent">Architect.</span></span></span>
-  </h2>
-  
-  <div class="bento-grid">
-    
-    <!-- Card 1: Photo & Contact -->
-    <div class="bento-card bento-col-3 bento-row-2 bento-hover" style="padding: 0; display: flex; flex-direction: column;">
-      <div style="height: 250px; position: relative; overflow: hidden;">
-        <img class="anim-breathe" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Vikram Singh" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%);">
-        <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg), transparent);"></div>
-      </div>
-      <div style="padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(14,165,233,0.1), transparent);">
-        <h3 class="gsap-inner" style="font-size: 1.6rem; margin-bottom: 0.2rem;">Vikram Singh</h3>
-        <p class="gsap-inner" style="color: var(--accent-1); font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 600;">Full-Stack Developer</p>
-        <div class="gsap-inner" style="font-size: 0.9rem; color: var(--muted); display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display:flex; justify-content:space-between;"><span>Loc</span><span style="color:var(--ink)">India</span></div>
-          <div style="display:flex; justify-content:space-between;"><span>Mail</span><a href="mailto:jangravikram3105@gmail.com" style="color:var(--ink); text-decoration:none;">Email</a></div>
-          <div style="display:flex; justify-content:space-between;"><span>Tel</span><span style="color:var(--ink)">+91 9068171157</span></div>
-          <div style="display:flex; justify-content:space-between;"><span>Git</span><a href="https://github.com/vikram-singh05" target="_blank" style="color:var(--ink); text-decoration:none;">@vikram-singh05</a></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 2: Bio -->
-    <div class="bento-card bento-col-5 bento-row-1 bento-hover" style="display: flex; flex-direction: column; justify-content: center;">
-      <h3 class="gsap-inner" style="margin-bottom: 1rem; font-size: 1.4rem; color: var(--accent-1); display: flex; align-items:center; gap: 0.5rem;">
-        <svg class="anim-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        About Me
-      </h3>
-      <p class="gsap-inner" style="font-size: 1.05rem; line-height: 1.7; margin: 0; color: var(--ink);">
-        I am a Full-Stack Developer specializing in high-performance, real-time architectures. I architect secure platforms with Zero-Trust principles, multi-model AI integrations, and beautifully engineered user interfaces.
-      </p>
-    </div>
-
-    <!-- Card 3: Core Tech -->
-    <div class="bento-card bento-col-4 bento-row-1 bento-hover" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), transparent);">
-      <h3 class="gsap-inner" style="margin-bottom: 1.2rem; font-size: 1.2rem; color: var(--accent-1); display: flex; align-items:center; gap: 0.5rem;">
-        <svg class="anim-float" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-        Tech Arsenal
-      </h3>
-      <div class="gsap-stagger-pills" style="display: flex; flex-wrap: wrap; gap: 0.6rem;">
-        <span class="tech-pill">React</span>
-        <span class="tech-pill">Next.js</span>
-        <span class="tech-pill">Node.js</span>
-        <span class="tech-pill">TypeScript</span>
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">FastAPI</span>
-        <span class="tech-pill">MongoDB</span>
-        <span class="tech-pill">Supabase</span>
-      </div>
-    </div>
-
-    <!-- Card 4: Education - B.Tech -->
-    <div class="bento-card bento-col-5 bento-row-1 bento-hover">
-      <div class="mono gsap-inner" style="color: var(--accent-1); font-size: 0.75rem; margin-bottom: 0.8rem;">Aug 2024 - Present</div>
-      <h3 class="gsap-inner" style="font-size: 1.3rem; margin-bottom: 0.5rem;">B.Tech in CSE</h3>
-      <p class="gsap-inner" style="font-size: 0.95rem; margin-bottom: 1.2rem; color: var(--muted);">Lovely Professional University</p>
-      <div class="gsap-inner anim-pulse" style="display: inline-block; padding: 0.4rem 1rem; background: rgba(14,165,233,0.1); color: var(--accent-1); border-radius: 99px; font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(14,165,233,0.2);">CGPA: 8.19</div>
-    </div>
-
-    <!-- Card 5: Training - UI/UX -->
-    <div class="bento-card bento-col-4 bento-row-1 bento-hover">
-      <div class="mono gsap-inner" style="color: var(--accent-2); font-size: 0.75rem; margin-bottom: 0.8rem;">Jun 2026 - Jul 2026</div>
-      <h3 class="gsap-inner" style="font-size: 1.3rem; margin-bottom: 0.5rem;">UI/UX Prototyping</h3>
-      <p class="gsap-inner" style="font-size: 0.95rem; margin-bottom: 1.2rem; color: var(--muted);">Centre for Professional Enhancement</p>
-      <div class="gsap-inner" style="display: inline-block; padding: 0.4rem 1rem; background: rgba(139,92,246,0.1); color: var(--accent-2); border-radius: 99px; font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(139,92,246,0.2);">Grade: A</div>
-    </div>
-
-    <!-- Card 6: Counter -->
-    <div class="bento-card bento-col-3 bento-row-1 bento-hover" style="display: flex; flex-direction: column; justify-content: center;">
-      <div class="mono gsap-inner" style="color: var(--accent-3); font-size: 0.75rem; margin-bottom: 1rem;">By The Numbers</div>
-      <div class="counter-num gsap-inner text-accent" data-count="5">00+</div>
-      <p class="gsap-inner" style="font-size: 0.9rem; margin: 0.6rem 0 0 0;">Certifications earned across AI, backend & databases.</p>
-    </div>
-
+  <!-- Liquid Glass Background -->
+  <div class="liquid-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
-</section>
+  <div class="noise-overlay"></div>
 
-<!-- Kinetic Marquee Strip -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-row">
-    <div class="marquee-track" data-dir="1">
-      <span class="marquee-fill">Real-Time Systems &#10022; Secure By Design &#10022; Zero-Trust &#10022; AI-Native &#10022;</span>
-      <span class="marquee-fill">Real-Time Systems &#10022; Secure By Design &#10022; Zero-Trust &#10022; AI-Native &#10022;</span>
-    </div>
-  </div>
-  <div class="marquee-row">
-    <div class="marquee-track" data-dir="-1">
-      <span class="marquee-outline">Live Chat &#10022; SSE Streaming &#10022; JWT &#10022; OTP &#10022; RBAC &#10022; Supabase &#10022; FastAPI &#10022; Next.js &#10022;</span>
-      <span class="marquee-outline">Live Chat &#10022; SSE Streaming &#10022; JWT &#10022; OTP &#10022; RBAC &#10022; Supabase &#10022; FastAPI &#10022; Next.js &#10022;</span>
-    </div>
-  </div>
-</div>
+  <!-- 3D Background Object -->
+  <canvas id="bg-canvas"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;"></canvas>
 
-<!-- Projects -->
-<section id="projects" class="container">
-  <h2 class="reveal-hero">
-    <span class="reveal-line-wrap"><span class="reveal-line">Selected <span class="text-accent">Works</span></span></span>
-  </h2>
-  
-  <!-- Project 1 -->
-  <div class="glass project-card card-3d">
-    <div>
-      <div class="mono gsap-inner" style="color: var(--accent-1);">Aug 2026</div>
-      <h3 class="gsap-inner" style="font-size: 2.5rem; margin: 1rem 0;">Trace</h3>
-      <p class="gsap-inner" style="color: var(--ink); font-weight: 600;">Lost & Found Platform</p>
-      <p class="gsap-inner">A production-hardened platform built solo. JWT in HTTP-only cookies, OTP-gated verification and role-based access control power a multi-stage claim-approval workflow with soft-delete audit trails.</p>
-      <div class="project-tags">
-        <span class="magnetic tag-anim">React 19</span>
-        <span class="magnetic tag-anim">Node.js</span>
-        <span class="magnetic tag-anim">Supabase</span>
-      </div>
-      <div class="gsap-inner" style="display: flex; gap: 1rem; margin-top: 2rem;">
-        <a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">View GitHub</a>
-        <a href="#" class="btn primary-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Live Demo</a>
-      </div>
-    </div>
-    
-    <div class="project-visual" style="height: 100%; min-height: 350px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(14,165,233,0.2); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); position: relative; overflow: hidden;">
-      <div class="anim-float" style="width: 85%; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; backdrop-filter: blur(10px);">
-        <div style="display: flex; gap: 0.5rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
-          <div class="anim-pulse" style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-1); box-shadow: 0 0 10px var(--accent-1);"></div>
-          <div style="font-size: 0.75rem; font-family: monospace; color: var(--muted);">Socket.io Connected • Room: #Trace_Claims</div>
-        </div>
-        <div class="chat-bubble-1" style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px 8px 8px 0; font-size: 0.85rem; align-self: flex-start; max-width: 80%; border: 1px solid rgba(255,255,255,0.05);">I found a lost item near block B. Claim #4092</div>
-        <div class="chat-bubble-2" style="background: rgba(14,165,233,0.15); color: var(--ink); padding: 0.8rem; border-radius: 8px 8px 0 8px; font-size: 0.85rem; align-self: flex-end; max-width: 80%; border: 1px solid rgba(14,165,233,0.3);">Verified. Uploading image to CDN... [200 OK]</div>
-      </div>
-    </div>
-  </div>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
 
-  <!-- Project 2 -->
-  <div class="glass project-card card-3d">
-    <div class="project-visual" style="height: 100%; min-height: 350px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(139,92,246,0.2); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); position: relative;">
-      <div style="width: 100%; height: 100%; position: absolute; inset: 0;">
-        <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;"><line x1="30%" y1="30%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4" stroke-width="2" /><line x1="50%" y1="50%" x2="70%" y2="70%" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4" stroke-width="2" /></svg>
-        <div class="anim-float" style="position: absolute; top: 20%; left: 20%; width: 50px; height: 50px; border-radius: 50%; background: rgba(139,92,246,0.1); border: 2px solid var(--accent-2); display: flex; align-items:center; justify-content:center; font-size: 0.6rem; font-weight: 800; box-shadow: 0 0 20px rgba(139,92,246,0.3);">Llama3</div>
-        <div class="anim-float-rev" style="position: absolute; bottom: 20%; right: 20%; width: 60px; height: 60px; border-radius: 50%; background: rgba(236,72,153,0.1); border: 2px solid var(--accent-3); display: flex; align-items:center; justify-content:center; font-size: 0.65rem; font-weight: 800; box-shadow: 0 0 20px rgba(236,72,153,0.3);">Qwen</div>
-        <div class="anim-pulse" style="position: absolute; top: 40%; left: 40%; width: 70px; height: 70px; border-radius: 50%; background: rgba(14,165,233,0.1); border: 2px solid var(--accent-1); display: flex; align-items:center; justify-content:center; font-size: 0.75rem; font-weight: 800; box-shadow: 0 0 30px rgba(14,165,233,0.4);">Groq</div>
-      </div>
+  <!-- Navigation -->
+  <nav id="main-nav" class="glass magnetic-container">
+    <a href="#" class="nav-logo magnetic">VS.</a>
+    <div class="nav-links" style="display: flex; gap: 1rem;">
+      <span class="nav-pill" aria-hidden="true"></span>
+      <a href="#profile" class="magnetic">About</a>
+      <a href="#journey" class="magnetic">Journey</a>
+      <a href="#projects" class="magnetic">Projects</a>
+      <a href="#certificates" class="magnetic">Certificates</a>
     </div>
-    
-    <div>
-      <div class="mono gsap-inner" style="color: var(--accent-2);">May 2026</div>
-      <h3 class="gsap-inner" style="font-size: 2.5rem; margin: 1rem 0;">EduLens AI</h3>
-      <p class="gsap-inner" style="color: var(--ink); font-weight: 600;">Multi-Model AI Chat</p>
-      <p class="gsap-inner">Real-time AI chat streaming tokens over Server-Sent Events across 3 Groq models (GPT-OSS 20B, 120B, Qwen 3.8 27B) and 5 personas, with first-token latency under 300 ms.</p>
-      <div class="project-tags">
-        <span class="magnetic tag-anim">React</span>
-        <span class="magnetic tag-anim">FastAPI</span>
-        <span class="magnetic tag-anim">Python</span>
-      </div>
-      <div class="gsap-inner" style="display: flex; gap: 1rem; margin-top: 2rem;">
-        <a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">View GitHub</a>
-        <a href="#" class="btn primary-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Live Demo</a>
-      </div>
-    </div>
-  </div>
+    <a href="#" data-open-resume class="magnetic" style="font-weight: 800; color: var(--accent-1);">Resume</a>
+  </nav>
 
-  <!-- Project 3 -->
-  <div class="glass project-card card-3d">
-    <div>
-      <div class="mono gsap-inner" style="color: var(--accent-3);">Mar 2026</div>
-      <h3 class="gsap-inner" style="font-size: 2.5rem; margin: 1rem 0;">Credit Profile System</h3>
-      <p class="gsap-inner" style="color: var(--ink); font-weight: 600;">Risk-Assessment Engine</p>
-      <p class="gsap-inner">A full-stack credit-scoring app serving RESTful APIs for real-time credit-score calculation, user registration, and transaction tracking.</p>
-      <div class="project-tags">
-        <span class="magnetic tag-anim">Node.js</span>
-        <span class="magnetic tag-anim">Express.js</span>
-        <span class="magnetic tag-anim">MongoDB</span>
-      </div>
-      <div class="gsap-inner" style="display: flex; gap: 1rem; margin-top: 2rem;">
-        <a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">View GitHub</a>
-        <a href="#" class="btn primary-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Live Demo</a>
-      </div>
-    </div>
-    
-    <div class="project-visual" style="height: 100%; min-height: 350px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(236,72,153,0.2); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); position: relative;">
-      <div style="width: 80%; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-        <div style="width: 100%; display: flex; align-items: flex-end; gap: 0.5rem; height: 120px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
-          <div class="risk-bar-1" style="flex: 1; background: rgba(236,72,153,0.4); border-radius: 4px 4px 0 0;"></div>
-          <div class="risk-bar-2" style="flex: 1; background: rgba(236,72,153,0.6); border-radius: 4px 4px 0 0;"></div>
-          <div class="risk-bar-3" style="flex: 1; background: rgba(236,72,153,0.3); border-radius: 4px 4px 0 0;"></div>
-          <div style="flex: 1; background: var(--accent-3); height: 95%; border-radius: 4px 4px 0 0; box-shadow: 0 0 15px rgba(236,72,153,0.5);"></div>
-        </div>
-        <div class="anim-pulse" style="width: 100%; text-align: center; font-family: monospace; font-size: 0.9rem; color: var(--accent-3); font-weight: 800; letter-spacing: 2px; padding: 0.5rem; border: 1px solid rgba(236,72,153,0.3); border-radius: 8px;">
-          RISK TIER: LOW (850)
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- Hero Section -->
+  <section class="container" style="min-height: 100vh; padding-top: 15vh;">
+    <div class="hero-content" style="max-width: 900px;">
+      <div class="mono reveal-text" style="margin-bottom: 2rem;">Full-stack developer & Architect</div>
 
-<!-- Certificates Section -->
-<section id="certificates" class="container">
-  <div class="mono reveal-text" style="color: var(--accent-2); margin-bottom: 2rem;">Accomplishments</div>
-  <h2 class="reveal-hero">
-    <span class="reveal-line-wrap"><span class="reveal-line">Certifications & <span class="text-accent">Awards</span></span></span>
-  </h2>
-  
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 4rem;">
-    
-    <!-- Cert 1: UI/UX -->
-    <div class="glass card-3d bento-hover" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
-      <div>
-        <div class="mono gsap-inner" style="color: var(--accent-1); margin-bottom: 1rem; font-size: 0.8rem;">Jun 2026 - Jul 2026</div>
-        <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">UI/UX Design & Prototyping</h3>
-        <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">Centre for Professional Enhancement, LPU</p>
-        <div class="gsap-inner" style="margin-top: 1.5rem; display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; font-size: 0.85rem; color: var(--ink);">Grade: A</div>
-      </div>
-      <div class="gsap-inner" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-        <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
-        <a href="https://drive.google.com/file/d/1V-xMG8A1LHLTi1nD9yoUCj_RaRivwqad/view?usp=sharing" target="_blank" class="btn glass-btn magnetic" style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(14,165,233,0.1);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-        </a>
-      </div>
-    </div>
-    
-    <!-- Cert 2: Node.js -->
-    <div class="glass card-3d bento-hover" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
-      <div>
-        <div class="mono gsap-inner" style="color: var(--accent-2); margin-bottom: 1rem; font-size: 0.8rem;">Sept 2026</div>
-        <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">Node.js (Intermediate)</h3>
-        <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">HackerRank</p>
-      </div>
-      <div class="gsap-inner" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-        <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
-        <a href="https://www.hackerrank.com/certificates/961c981db240" target="_blank" class="btn glass-btn magnetic" style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(139,92,246,0.1);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-        </a>
+      <h1 class="reveal-hero">
+        <span class="reveal-line-wrap"><span class="reveal-line">Building <span
+              class="text-accent">digital</span></span></span>
+        <span class="reveal-line-wrap"><span class="reveal-line">experiences that feel <span
+              class="text-gradient">alive.</span></span></span>
+      </h1>
+
+      <p class="reveal-text" style="margin-top: 2rem; font-size: clamp(1.2rem, 2vw, 1.5rem);">I engineer secure,
+        real-time web applications—live chat, streaming AI, and robust authentication—crafted with the precision of a
+        senior architect.</p>
+
+      <div class="hero-btns gsap-btn-stagger">
+        <div class="magnetic-container"><a href="#projects" class="btn primary-btn magnetic">Explore Work</a></div>
+        <div class="magnetic-container"><a
+            href="#" data-open-resume
+            class="btn glass-btn magnetic">View Resume</a></div>
       </div>
     </div>
 
-    <!-- Cert 3: React -->
-    <div class="glass card-3d bento-hover" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
-      <div>
-        <div class="mono gsap-inner" style="color: var(--accent-3); margin-bottom: 1rem; font-size: 0.8rem;">Sept 2026</div>
-        <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">React (Basic)</h3>
-        <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">HackerRank</p>
-      </div>
-      <div class="gsap-inner" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-        <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
-        <a href="https://www.hackerrank.com/certificates/5f0bed28dcdc" target="_blank" class="btn glass-btn magnetic" style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(236,72,153,0.1);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-        </a>
-      </div>
-    </div>
+    <a href="#profile" class="scroll-badge" aria-label="Scroll to profile">
+      <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <path id="badgeCircle" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" />
+        </defs>
+        <text>
+          <textPath href="#badgeCircle">SCROLL TO EXPLORE &#10022; OPEN TO WORK &#10022;</textPath>
+        </text>
+      </svg>
+      <span class="arrow-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14m0 0l-6-6m6 6l6-6" />
+        </svg></span>
+    </a>
+  </section>
 
-    <!-- Cert 4: DBMS -->
-    <div class="glass card-3d bento-hover" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
-      <div>
-        <div class="mono gsap-inner" style="color: var(--accent-1); margin-bottom: 1rem; font-size: 0.8rem;">Jul 2026</div>
-        <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">Database Management System</h3>
-        <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">Infosys Springboard</p>
-      </div>
-      <div class="gsap-inner" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-        <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
-        <a href="https://drive.google.com/file/d/1Gd9Oq9ISSh20K_TwVb98bJXC6vSm6Jpp/view?usp=sharing" target="_blank" class="btn glass-btn magnetic" style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(14,165,233,0.1);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Cert 5: C++ -->
-    <div class="glass card-3d bento-hover" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
-      <div>
-        <div class="mono gsap-inner" style="color: var(--accent-2); margin-bottom: 1rem; font-size: 0.8rem;">Aug 2025</div>
-        <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">Programming Using C++</h3>
-        <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">Infosys Springboard</p>
-      </div>
-      <div class="gsap-inner" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-        <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
-        <a href="https://drive.google.com/file/d/1oYLm43S9su-u3rX3vNb6nUSKcN38LBtQ/view?usp=sharing" target="_blank" class="btn glass-btn magnetic" style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(139,92,246,0.1);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-        </a>
-      </div>
-    </div>
-    
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact" class="container" style="align-items: center; text-align: center; min-height: 80vh;">
-  <div class="glass card-3d" style="padding: 6rem 4rem; width: 100%; max-width: 1000px;">
-    <div class="mono reveal-text" style="margin-bottom: 2rem;">Next Steps</div>
-    <h2 class="reveal-hero" style="font-size: clamp(3rem, 6vw, 6rem);">
-      <span class="reveal-line-wrap"><span class="reveal-line">Let's <span class="text-accent">collaborate.</span></span></span>
+  <!-- Personal Details & CV Section -->
+  <section id="profile" class="container" style="padding-top: 15vh;">
+    <div class="mono reveal-text" style="color: var(--accent-1); margin-bottom: 2rem;">Profile & Expertise</div>
+    <h2 class="reveal-hero" style="margin-bottom: 2rem;">
+      <span class="reveal-line-wrap"><span class="reveal-line">The <span
+            class="text-accent">Architect.</span></span></span>
     </h2>
-    <p class="reveal-text" style="margin: 0 auto 4rem auto;">Available for full-time roles and visionary freelance projects.</p>
-    
-    <div class="hero-btns gsap-btn-stagger" style="justify-content: center;">
-      <div class="magnetic-container"><a href="mailto:jangravikram3105@gmail.com" class="btn primary-btn magnetic">Email Me</a></div>
-      <div class="magnetic-container"><a href="https://linkedin.com/in/vikram-singh05" target="_blank" class="btn glass-btn magnetic">LinkedIn</a></div>
-      <div class="magnetic-container"><a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic">GitHub</a></div>
+
+    <div class="bento-grid">
+
+      <!-- Card 1: Photo & Contact -->
+      <div class="bento-card bento-col-3 bento-row-2 bento-hover"
+        style="padding: 0; display: flex; flex-direction: column;">
+        <div style="height: 250px; position: relative; overflow: hidden;">
+          <img class="anim-breathe"
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+            alt="Vikram Singh" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%);">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg), transparent);"></div>
+        </div>
+        <div
+          style="padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(14,165,233,0.1), transparent);">
+          <h3 class="gsap-inner" style="font-size: 1.6rem; margin-bottom: 0.2rem;">Vikram Singh</h3>
+          <p class="gsap-inner"
+            style="color: var(--accent-1); font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 600;">Full-Stack
+            Developer</p>
+          <div class="gsap-inner"
+            style="font-size: 0.9rem; color: var(--muted); display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display:flex; justify-content:space-between;"><span>Loc</span><span
+                style="color:var(--ink)">India</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Mail</span><a
+                href="mailto:jangravikram3105@gmail.com" style="color:var(--ink); text-decoration:none;">Email</a></div>
+            <div style="display:flex; justify-content:space-between;"><span>Tel</span><span style="color:var(--ink)">+91
+                9068171157</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Git</span><a
+                href="https://github.com/vikram-singh05" target="_blank"
+                style="color:var(--ink); text-decoration:none;">@vikram-singh05</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Bio -->
+      <div class="bento-card bento-col-5 bento-row-1 bento-hover"
+        style="display: flex; flex-direction: column; justify-content: center;">
+        <h3 class="gsap-inner"
+          style="margin-bottom: 1rem; font-size: 1.4rem; color: var(--accent-1); display: flex; align-items:center; gap: 0.5rem;">
+          <svg class="anim-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          About Me
+        </h3>
+        <p class="gsap-inner" style="font-size: 1.05rem; line-height: 1.7; margin: 0; color: var(--ink);">
+          I am a Full-Stack Developer specializing in high-performance, real-time architectures. I architect secure
+          platforms with Zero-Trust principles, multi-model AI integrations, and beautifully engineered user interfaces.
+        </p>
+      </div>
+
+      <!-- Card 3: Core Tech -->
+      <div class="bento-card bento-col-4 bento-row-1 bento-hover"
+        style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), transparent);">
+        <h3 class="gsap-inner"
+          style="margin-bottom: 1.2rem; font-size: 1.2rem; color: var(--accent-1); display: flex; align-items:center; gap: 0.5rem;">
+          <svg class="anim-float" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          Tech Arsenal
+        </h3>
+        <div class="gsap-stagger-pills" style="display: flex; flex-wrap: wrap; gap: 0.6rem;">
+          <span class="tech-pill">React</span>
+          <span class="tech-pill">Next.js</span>
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">TypeScript</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">FastAPI</span>
+          <span class="tech-pill">MongoDB</span>
+          <span class="tech-pill">Supabase</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Education - B.Tech -->
+      <div class="bento-card bento-col-5 bento-row-1 bento-hover">
+        <div class="mono gsap-inner" style="color: var(--accent-1); font-size: 0.75rem; margin-bottom: 0.8rem;">Aug 2024
+          - Present</div>
+        <h3 class="gsap-inner" style="font-size: 1.3rem; margin-bottom: 0.5rem;">B.Tech in CSE</h3>
+        <p class="gsap-inner" style="font-size: 0.95rem; margin-bottom: 1.2rem; color: var(--muted);">Lovely
+          Professional University</p>
+        <div class="gsap-inner anim-pulse"
+          style="display: inline-block; padding: 0.4rem 1rem; background: rgba(14,165,233,0.1); color: var(--accent-1); border-radius: 99px; font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(14,165,233,0.2);">
+          CGPA: 8.19</div>
+      </div>
+
+      <!-- Card 5: Training - UI/UX -->
+      <div class="bento-card bento-col-4 bento-row-1 bento-hover">
+        <div class="mono gsap-inner" style="color: var(--accent-2); font-size: 0.75rem; margin-bottom: 0.8rem;">Jun 2026
+          - Jul 2026</div>
+        <h3 class="gsap-inner" style="font-size: 1.3rem; margin-bottom: 0.5rem;">UI/UX Prototyping</h3>
+        <p class="gsap-inner" style="font-size: 0.95rem; margin-bottom: 1.2rem; color: var(--muted);">Centre for
+          Professional Enhancement</p>
+        <div class="gsap-inner"
+          style="display: inline-block; padding: 0.4rem 1rem; background: rgba(139,92,246,0.1); color: var(--accent-2); border-radius: 99px; font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(139,92,246,0.2);">
+          Grade: A</div>
+      </div>
+
+      <!-- Card 6: Counter -->
+      <div class="bento-card bento-col-3 bento-row-1 bento-hover"
+        style="display: flex; flex-direction: column; justify-content: center;">
+        <div class="mono gsap-inner" style="color: var(--accent-3); font-size: 0.75rem; margin-bottom: 1rem;">By The
+          Numbers</div>
+        <div class="counter-num gsap-inner text-accent" data-count="5">00+</div>
+        <p class="gsap-inner" style="font-size: 0.9rem; margin: 0.6rem 0 0 0;">Certifications earned across AI, backend
+          & databases.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Kinetic Marquee Strip -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-row">
+      <div class="marquee-track" data-dir="1">
+        <span class="marquee-fill">Real-Time Systems &#10022; Secure By Design &#10022; Zero-Trust &#10022; AI-Native
+          &#10022;</span>
+        <span class="marquee-fill">Real-Time Systems &#10022; Secure By Design &#10022; Zero-Trust &#10022; AI-Native
+          &#10022;</span>
+      </div>
+    </div>
+    <div class="marquee-row">
+      <div class="marquee-track" data-dir="-1">
+        <span class="marquee-outline">Live Chat &#10022; SSE Streaming &#10022; JWT &#10022; OTP &#10022; RBAC &#10022;
+          Supabase &#10022; FastAPI &#10022; Next.js &#10022;</span>
+        <span class="marquee-outline">Live Chat &#10022; SSE Streaming &#10022; JWT &#10022; OTP &#10022; RBAC &#10022;
+          Supabase &#10022; FastAPI &#10022; Next.js &#10022;</span>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- Back To Top -->
-<button id="toTop" class="glass magnetic" aria-label="Back to top">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5m0 0l-6 6m6-6l6 6"/></svg>
-</button>
+  <!-- Journey — Flight Path -->
+  <section id="journey" class="container">
+    <div class="mono reveal-text" style="color: var(--accent-3); margin-bottom: 2rem;">Milestones In Motion</div>
+    <h2 class="reveal-hero">
+      <span class="reveal-line-wrap"><span class="reveal-line">The <span
+            class="text-accent">Journey.</span></span></span>
+    </h2>
+    <p class="reveal-text journey-note" style="max-width: 60ch;">Every system shipped, every credential earned — mapped
+      along one timeline. Scroll, and the path lights up.</p>
 
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="https://unpkg.com/split-type"></script>
+    <div class="timeline">
+      <div class="rail"><span class="rail-fill"></span></div>
+      <span class="rail-spark" aria-hidden="true"></span>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  
-  // 0. SCARY LOADER ANIMATION
-  const loaderLogs = [
-    { text: "user@system:~$ ssh root@192.168.1.104", delay: 1000 },
-    { text: "root@192.168.1.104's password: ***", delay: 1200 },
-    { text: "Permission denied, please try again.", delay: 400, type: 'error' },
-    { text: "root@192.168.1.104's password: ********", delay: 800 },
-    { text: "Permission denied (publickey,password).", delay: 400, type: 'error' },
-    { text: "user@system:~$ ./breach_protocol.sh --target=mainframe", delay: 1500 },
-    { text: "[!] INITIATING BRUTE FORCE ATTACK...", delay: 600, type: 'warning' },
-    { text: "Bypassing Node-1 Firewall... SUCCESS", delay: 600 },
-    { text: "Bypassing Node-2 Firewall... SUCCESS", delay: 600 },
-    { text: "Decrypting RSA-4096 Keys [||||||||||||||||] 100%", delay: 1200 },
-    { text: "[!] WARNING: INTRUSION DETECTED", delay: 200, type: 'error', glitch: true },
-    { text: "[!] SYSTEM LOCKDOWN INITIATED", delay: 200, type: 'error' },
-    { text: "ERROR: Access restricted by System Admin", delay: 1800, type: 'error' },
-    { text: "user@system:~$ ./override_kernel.sh -f", delay: 1000, stopGlitch: true },
-    { text: "Injecting payload... [0x00A1F3B9]", delay: 800 },
-    { text: "Kernel panic prevented. Root privileges escalating...", delay: 800 },
-    { text: "Access Granted. Welcome ROOT.", delay: 600, type: 'success' },
-    { text: "Loading Vikram_Singh_Portfolio_Assets...", delay: 500 },
-    { text: "Mounting Liquid Engine...", delay: 500 },
-    { text: "Rendering 3D Environment...", delay: 800 },
-    { text: "SYSTEM BREACH COMPLETE.", delay: 600, type: 'success' }
-  ];
-  
-  const logContainer = document.getElementById('log-container');
-  const loader = document.getElementById('hacker-loader');
-  const glitchLayer = document.getElementById('glitch-layer');
-  
-  document.body.style.overflow = 'hidden';
-  
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-  
-  function scrambleText(element, finalString, duration, callback) {
-    let iteration = 0;
-    const maxIterations = finalString.length;
-    if(maxIterations === 0) {
-       element.innerText = finalString;
-       if(callback) callback();
-       return;
-    }
-    const interval = Math.max(10, duration / maxIterations);
-    
-    const scrambleInterval = setInterval(() => {
-      element.innerText = finalString.split('').map((char, index) => {
-        if(index < iteration) return char;
-        if(char === ' ') return ' ';
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join('');
-      
-      iteration += 1.5;
-      
-      if(iteration >= maxIterations) {
-        clearInterval(scrambleInterval);
-        element.innerText = finalString;
-        if (callback) callback();
+      <div class="tl-item" data-side="l">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono"><b>Aug 2024</b> — Present</div>
+          <h3>Foundation Year</h3>
+          <p>Enrolled in B.Tech CSE at Lovely Professional University. Dived into system design, data structures and the
+            physics of interfaces — holding a steady 8.19 CGPA and climbing.</p>
+          <div class="tl-tags"><span>B.Tech CSE</span><span>LPU</span><span>CGPA 8.19</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="r">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono" style="--a: var(--accent-2);"><b style="color:var(--accent-2);">Aug 2025</b></div>
+          <h3>First Credential</h3>
+          <p>Earned the Programming Using C++ certification from Infosys Springboard — the grammar that still powers
+            half of my systems thinking.</p>
+          <div class="tl-tags"><span>C++</span><span>Infosys Springboard</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="l">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono"><b>Mar 2026</b></div>
+          <h3>First Full Stack, Live</h3>
+          <p>Shipped the Credit Profile System — a risk-assessment engine serving RESTful scoring, user registration and
+            transaction tracking on MongoDB.</p>
+          <div class="tl-tags"><span>Node.js</span><span>Express</span><span>MongoDB</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="r">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono"><b style="color:var(--accent-2);">May 2026</b></div>
+          <h3>Going AI-Native</h3>
+          <p>Built EduLens AI — multi-model chat streaming tokens over SSE with first-token latency under 300 ms,
+            plugged into Groq's fastest endpoints.</p>
+          <div class="tl-tags"><span>FastAPI</span><span>SSE Streaming</span><span>Groq</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="l">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono"><b>Jun — Jul 2026</b></div>
+          <h3>Design Craft, Unlocked</h3>
+          <p>Completed UI/UX Prototyping training at LPU's Centre for Professional Enhancement with Grade A — and
+            certified in Database Management Systems along the way.</p>
+          <div class="tl-tags"><span>UI/UX · Grade A</span><span>DBMS Certified</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="r">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono"><b>Aug 2026</b></div>
+          <h3>Zero-Trust By Default</h3>
+          <p>Production-hardened Trace, a lost &amp; found platform — JWT in HTTP-only cookies, OTP-gated verification
+            and role-based access control, engineered solo.</p>
+          <div class="tl-tags"><span>JWT</span><span>OTP + RBAC</span><span>Audit Trails</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="l">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover">
+          <div class="tl-when mono"><b>Sep 2026</b></div>
+          <h3>Backend, Certified</h3>
+          <p>Doubled down: HackerRank Node.js (Intermediate) and React (Basic) — formally stamping what the repositories
+            already proved.</p>
+          <div class="tl-tags"><span>HackerRank</span><span>Node.js</span><span>React</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-side="r">
+        <div class="tl-node"></div>
+        <div class="tl-card glass bento-hover" style="border-color: rgba(14,165,233,.3);">
+          <div class="tl-when mono"><b>Now</b> — Open To Work</div>
+          <h3>This Chapter Is Yours</h3>
+          <p>Real-time systems, AI-native products, beautifully engineered interfaces. Full-time roles and freelance
+            builds — the runway is clear.</p>
+          <div class="tl-tags"><a href="mailto:jangravikram3105@gmail.com"
+              style="color: var(--accent-1); border-color: rgba(14,165,233,.4);">Let's Talk ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="container">
+    <h2 class="reveal-hero">
+      <span class="reveal-line-wrap"><span class="reveal-line">Selected <span
+            class="text-accent">Works</span></span></span>
+    </h2>
+
+    <!-- Project 1 -->
+    <div class="glass project-card card-3d">
+      <div>
+        <div class="mono gsap-inner" style="color: var(--accent-1);">Aug 2026</div>
+        <h3 class="gsap-inner" style="font-size: 2.5rem; margin: 1rem 0;">Trace</h3>
+        <p class="gsap-inner" style="color: var(--ink); font-weight: 600;">Lost & Found Platform</p>
+        <p class="gsap-inner">A production-hardened platform built solo. JWT in HTTP-only cookies, OTP-gated
+          verification and role-based access control power a multi-stage claim-approval workflow with soft-delete audit
+          trails.</p>
+        <div class="project-tags">
+          <span class="magnetic tag-anim">React 19</span>
+          <span class="magnetic tag-anim">Node.js</span>
+          <span class="magnetic tag-anim">Supabase</span>
+        </div>
+        <div class="gsap-inner" style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic"
+            style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">View GitHub</a>
+          <a href="#" class="btn primary-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Live Demo</a>
+        </div>
+      </div>
+
+      <div class="project-visual"
+        style="height: 100%; min-height: 350px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(14,165,233,0.2); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.18); position: relative; overflow: hidden;">
+        <div class="anim-float"
+          style="width: 85%; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; backdrop-filter: blur(10px);">
+          <div
+            style="display: flex; gap: 0.5rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+            <div class="anim-pulse"
+              style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-1); box-shadow: 0 0 10px var(--accent-1);">
+            </div>
+            <div style="font-size: 0.75rem; font-family: monospace; color: var(--muted);">Socket.io Connected • Room:
+              #Trace_Claims</div>
+          </div>
+          <div class="chat-bubble-1"
+            style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px 8px 8px 0; font-size: 0.85rem; align-self: flex-start; max-width: 80%; border: 1px solid rgba(255,255,255,0.05);">
+            I found a lost item near block B. Claim #4092</div>
+          <div class="chat-bubble-2"
+            style="background: rgba(14,165,233,0.15); color: var(--ink); padding: 0.8rem; border-radius: 8px 8px 0 8px; font-size: 0.85rem; align-self: flex-end; max-width: 80%; border: 1px solid rgba(14,165,233,0.3);">
+            Verified. Uploading image to CDN... [200 OK]</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="glass project-card card-3d">
+      <div class="project-visual"
+        style="height: 100%; min-height: 350px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(139,92,246,0.2); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.18); position: relative;">
+        <div style="width: 100%; height: 100%; position: absolute; inset: 0;">
+          <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+            <line x1="30%" y1="30%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4"
+              stroke-width="2" />
+            <line x1="50%" y1="50%" x2="70%" y2="70%" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4"
+              stroke-width="2" />
+          </svg>
+          <div class="anim-float"
+            style="position: absolute; top: 20%; left: 20%; width: 50px; height: 50px; border-radius: 50%; background: rgba(139,92,246,0.1); border: 2px solid var(--accent-2); display: flex; align-items:center; justify-content:center; font-size: 0.6rem; font-weight: 800; box-shadow: 0 0 20px rgba(139,92,246,0.3);">
+            Llama3</div>
+          <div class="anim-float-rev"
+            style="position: absolute; bottom: 20%; right: 20%; width: 60px; height: 60px; border-radius: 50%; background: rgba(236,72,153,0.1); border: 2px solid var(--accent-3); display: flex; align-items:center; justify-content:center; font-size: 0.65rem; font-weight: 800; box-shadow: 0 0 20px rgba(236,72,153,0.3);">
+            Qwen</div>
+          <div class="anim-pulse"
+            style="position: absolute; top: 40%; left: 40%; width: 70px; height: 70px; border-radius: 50%; background: rgba(14,165,233,0.1); border: 2px solid var(--accent-1); display: flex; align-items:center; justify-content:center; font-size: 0.75rem; font-weight: 800; box-shadow: 0 0 30px rgba(14,165,233,0.4);">
+            Groq</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mono gsap-inner" style="color: var(--accent-2);">May 2026</div>
+        <h3 class="gsap-inner" style="font-size: 2.5rem; margin: 1rem 0;">EduLens AI</h3>
+        <p class="gsap-inner" style="color: var(--ink); font-weight: 600;">Multi-Model AI Chat</p>
+        <p class="gsap-inner">Real-time AI chat streaming tokens over Server-Sent Events across 3 Groq models (GPT-OSS
+          20B, 120B, Qwen 3.8 27B) and 5 personas, with first-token latency under 300 ms.</p>
+        <div class="project-tags">
+          <span class="magnetic tag-anim">React</span>
+          <span class="magnetic tag-anim">FastAPI</span>
+          <span class="magnetic tag-anim">Python</span>
+        </div>
+        <div class="gsap-inner" style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic"
+            style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">View GitHub</a>
+          <a href="#" class="btn primary-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="glass project-card card-3d">
+      <div>
+        <div class="mono gsap-inner" style="color: var(--accent-3);">Mar 2026</div>
+        <h3 class="gsap-inner" style="font-size: 2.5rem; margin: 1rem 0;">Credit Profile System</h3>
+        <p class="gsap-inner" style="color: var(--ink); font-weight: 600;">Risk-Assessment Engine</p>
+        <p class="gsap-inner">A full-stack credit-scoring app serving RESTful APIs for real-time credit-score
+          calculation, user registration, and transaction tracking.</p>
+        <div class="project-tags">
+          <span class="magnetic tag-anim">Node.js</span>
+          <span class="magnetic tag-anim">Express.js</span>
+          <span class="magnetic tag-anim">MongoDB</span>
+        </div>
+        <div class="gsap-inner" style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <a href="https://github.com/vikram-singh05" target="_blank" class="btn glass-btn magnetic"
+            style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">View GitHub</a>
+          <a href="#" class="btn primary-btn magnetic" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Live Demo</a>
+        </div>
+      </div>
+
+      <div class="project-visual"
+        style="height: 100%; min-height: 350px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(236,72,153,0.2); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.18); position: relative;">
+        <div style="width: 80%; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+          <div
+            style="width: 100%; display: flex; align-items: flex-end; gap: 0.5rem; height: 120px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+            <div class="risk-bar-1" style="flex: 1; background: rgba(236,72,153,0.4); border-radius: 4px 4px 0 0;">
+            </div>
+            <div class="risk-bar-2" style="flex: 1; background: rgba(236,72,153,0.6); border-radius: 4px 4px 0 0;">
+            </div>
+            <div class="risk-bar-3" style="flex: 1; background: rgba(236,72,153,0.3); border-radius: 4px 4px 0 0;">
+            </div>
+            <div
+              style="flex: 1; background: var(--accent-3); height: 95%; border-radius: 4px 4px 0 0; box-shadow: 0 0 15px rgba(236,72,153,0.5);">
+            </div>
+          </div>
+          <div class="anim-pulse"
+            style="width: 100%; text-align: center; font-family: monospace; font-size: 0.9rem; color: var(--accent-3); font-weight: 800; letter-spacing: 2px; padding: 0.5rem; border: 1px solid rgba(236,72,153,0.3); border-radius: 8px;">
+            RISK TIER: LOW (850)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Section — credentials open in-page -->
+  <section id="certificates" class="container">
+    <div class="mono reveal-text" style="color: var(--accent-2); margin-bottom: 2rem;">Accomplishments</div>
+    <h2 class="reveal-hero">
+      <span class="reveal-line-wrap"><span class="reveal-line">Certifications & <span
+            class="text-accent">Awards</span></span></span>
+    </h2>
+    <p class="reveal-text" style="max-width: 55ch;">Tap any credential — the proof opens right here, in glass. No
+      redirects.</p>
+
+    <div
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 4rem;">
+
+      <!-- Cert 1: UI/UX -->
+      <div class="glass card-3d bento-hover cert-card"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden; cursor: pointer;"
+        data-title="UI/UX Design & Prototyping" data-issuer="Centre for Professional Enhancement · LPU"
+        data-date="Jun — Jul 2026" data-grade="Grade A" data-seal="VS" data-acc="1"
+        data-id="CPE-LPU-2026-UIUX"
+        data-url="https://drive.google.com/file/d/1V-xMG8A1LHLTi1nD9yoUCj_RaRivwqad/view?usp=sharing">
+        <div
+          style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); border-radius: 50%;">
+        </div>
+        <div>
+          <div class="mono gsap-inner" style="color: var(--accent-1); margin-bottom: 1rem; font-size: 0.8rem;">Jun 2026
+            - Jul 2026</div>
+          <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">UI/UX Design &
+            Prototyping</h3>
+          <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">Centre for Professional
+            Enhancement, LPU</p>
+          <div class="gsap-inner"
+            style="margin-top: 1.5rem; display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; font-size: 0.85rem; color: var(--ink);">
+            Grade: A</div>
+        </div>
+        <div class="gsap-inner"
+          style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+          <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
+          <span class="btn glass-btn magnetic cert-eye" type="button"
+            style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(14,165,233,0.1);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Cert 2: Node.js -->
+      <div class="glass card-3d bento-hover cert-card"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden; cursor: pointer;"
+        data-title="Node.js (Intermediate)" data-issuer="HackerRank" data-date="Sep 2026" data-grade="Certified"
+        data-seal="HR" data-acc="2" data-id="HR-NODEJS-INT-961C"
+        data-url="https://www.hackerrank.com/certificates/961c981db240">
+        <div
+          style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); border-radius: 50%;">
+        </div>
+        <div>
+          <div class="mono gsap-inner" style="color: var(--accent-2); margin-bottom: 1rem; font-size: 0.8rem;">Sept 2026
+          </div>
+          <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">Node.js
+            (Intermediate)</h3>
+          <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">HackerRank</p>
+        </div>
+        <div class="gsap-inner"
+          style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+          <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
+          <span class="btn glass-btn magnetic cert-eye" type="button"
+            style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(139,92,246,0.1);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Cert 3: React -->
+      <div class="glass card-3d bento-hover cert-card"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden; cursor: pointer;"
+        data-title="React (Basic)" data-issuer="HackerRank" data-date="Sep 2026" data-grade="Certified"
+        data-seal="HR" data-acc="3" data-id="HR-REACT-BAS-5F0B"
+        data-url="https://www.hackerrank.com/certificates/5f0bed28dcdc">
+        <div
+          style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%); border-radius: 50%;">
+        </div>
+        <div>
+          <div class="mono gsap-inner" style="color: var(--accent-3); margin-bottom: 1rem; font-size: 0.8rem;">Sept 2026
+          </div>
+          <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">React (Basic)</h3>
+          <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">HackerRank</p>
+        </div>
+        <div class="gsap-inner"
+          style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+          <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
+          <span class="btn glass-btn magnetic cert-eye" type="button"
+            style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(236,72,153,0.1);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Cert 4: DBMS -->
+      <div class="glass card-3d bento-hover cert-card"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden; cursor: pointer;"
+        data-title="Database Management System" data-issuer="Infosys Springboard" data-date="Jul 2026"
+        data-grade="Certified" data-seal="IS" data-acc="1" data-id="IS-DBMS-2026-1G9O"
+        data-url="https://drive.google.com/file/d/1Gd9Oq9ISSh20K_TwVb98bJXC6vSm6Jpp/view?usp=sharing">
+        <div
+          style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); border-radius: 50%;">
+        </div>
+        <div>
+          <div class="mono gsap-inner" style="color: var(--accent-1); margin-bottom: 1rem; font-size: 0.8rem;">Jul 2026
+          </div>
+          <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">Database Management
+            System</h3>
+          <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">Infosys Springboard</p>
+        </div>
+        <div class="gsap-inner"
+          style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+          <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
+          <span class="btn glass-btn magnetic cert-eye" type="button"
+            style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(14,165,233,0.1);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Cert 5: C++ -->
+      <div class="glass card-3d bento-hover cert-card"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; position: relative; overflow: hidden; cursor: pointer;"
+        data-title="Programming Using C++" data-issuer="Infosys Springboard" data-date="Aug 2025" data-grade="Certified"
+        data-seal="IS" data-acc="2" data-id="IS-CPP-2025-0YLM"
+        data-url="https://drive.google.com/file/d/1oYLm43S9su-u3rX3vNb6nUSKcN38LBtQ/view?usp=sharing">
+        <div
+          style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); border-radius: 50%;">
+        </div>
+        <div>
+          <div class="mono gsap-inner" style="color: var(--accent-2); margin-bottom: 1rem; font-size: 0.8rem;">Aug 2025
+          </div>
+          <h3 class="gsap-inner" style="font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3;">Programming Using
+            C++</h3>
+          <p class="gsap-inner" style="font-size: 0.95rem; color: var(--muted); margin: 0;">Infosys Springboard</p>
+        </div>
+        <div class="gsap-inner"
+          style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+          <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">View Credential</span>
+          <span class="btn glass-btn magnetic cert-eye" type="button"
+            style="padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; box-shadow: 0 0 20px rgba(139,92,246,0.1);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="container" style="align-items: center; text-align: center; min-height: 80vh;">
+    <div class="glass card-3d" style="padding: 6rem 4rem; width: 100%; max-width: 1000px;">
+      <div class="mono reveal-text" style="margin-bottom: 2rem;">Next Steps</div>
+      <h2 class="reveal-hero" style="font-size: clamp(3rem, 6vw, 6rem);">
+        <span class="reveal-line-wrap"><span class="reveal-line">Let's <span
+              class="text-accent">collaborate.</span></span></span>
+      </h2>
+      <p class="reveal-text" style="margin: 0 auto 4rem auto;">Available for full-time roles and visionary freelance
+        projects.</p>
+
+      <div class="hero-btns gsap-btn-stagger" style="justify-content: center;">
+        <div class="magnetic-container"><a href="mailto:jangravikram3105@gmail.com"
+            class="btn primary-btn magnetic">Email Me</a></div>
+        <div class="magnetic-container"><a href="Vikram_Singh_CV.pdf" download="Vikram_Singh_CV.pdf"
+            class="btn glass-btn magnetic">Download CV</a></div>
+        <div class="magnetic-container"><a href="https://linkedin.com/in/vikram-singh05" target="_blank"
+            class="btn glass-btn magnetic">LinkedIn</a></div>
+        <div class="magnetic-container"><a href="https://github.com/vikram-singh05" target="_blank"
+            class="btn glass-btn magnetic">GitHub</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Liquid Glass Modal -->
+  <div id="modal-root" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-bloom" id="modal-bloom"></div>
+    <div class="modal-panel" id="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+      <div class="panel-head">
+        <div class="panel-title">
+          <span class="mono" id="modal-kicker">Credential</span>
+          <h3 id="modal-name"></h3>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Close" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+            stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="panel-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Back To Top -->
+  <button id="toTop" class="glass magnetic" aria-label="Back to top">
+    <svg class="toTop-ring" viewBox="0 0 56 56" aria-hidden="true">
+      <circle class="track" cx="28" cy="28" r="26" />
+      <circle class="trace" cx="28" cy="28" r="26" />
+    </svg>
+    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5m0 0l-6 6m6-6l6 6" />
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 0. SCARY LOADER ANIMATION
+      const loaderLogs = [
+        { text: "user@system:~$ ssh root@192.168.1.104", delay: 1000 },
+        { text: "root@192.168.1.104's password: ***", delay: 1200 },
+        { text: "Permission denied, please try again.", delay: 400, type: 'error' },
+        { text: "root@192.168.1.104's password: ********", delay: 800 },
+        { text: "Permission denied (publickey,password).", delay: 400, type: 'error' },
+        { text: "user@system:~$ ./breach_protocol.sh --target=mainframe", delay: 1500 },
+        { text: "[!] INITIATING BRUTE FORCE ATTACK...", delay: 600, type: 'warning' },
+        { text: "Bypassing Node-1 Firewall... SUCCESS", delay: 600 },
+        { text: "Bypassing Node-2 Firewall... SUCCESS", delay: 600 },
+        { text: "Decrypting RSA-4096 Keys [||||||||||||||||] 100%", delay: 1200 },
+        { text: "[!] WARNING: INTRUSION DETECTED", delay: 200, type: 'error', glitch: true },
+        { text: "[!] SYSTEM LOCKDOWN INITIATED", delay: 200, type: 'error' },
+        { text: "ERROR: Access restricted by System Admin", delay: 1800, type: 'error' },
+        { text: "user@system:~$ ./override_kernel.sh -f", delay: 1000, stopGlitch: true },
+        { text: "Injecting payload... [0x00A1F3B9]", delay: 800 },
+        { text: "Kernel panic prevented. Root privileges escalating...", delay: 800 },
+        { text: "Access Granted. Welcome ROOT.", delay: 600, type: 'success' },
+        { text: "Loading Vikram_Singh_Portfolio_Assets...", delay: 500 },
+        { text: "Mounting Liquid Engine...", delay: 500 },
+        { text: "Rendering 3D Environment...", delay: 800 },
+        { text: "SYSTEM BREACH COMPLETE.", delay: 600, type: 'success' }
+      ];
+
+      const logContainer = document.getElementById('log-container');
+      const loader = document.getElementById('hacker-loader');
+      const glitchLayer = document.getElementById('glitch-layer');
+
+      document.body.style.overflow = 'hidden';
+
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+      function scrambleText(element, finalString, duration, callback) {
+        let iteration = 0;
+        const maxIterations = finalString.length;
+        if (maxIterations === 0) {
+          element.innerText = finalString;
+          if (callback) callback();
+          return;
+        }
+        const interval = Math.max(10, duration / maxIterations);
+
+        const scrambleInterval = setInterval(() => {
+          element.innerText = finalString.split('').map((char, index) => {
+            if (index < iteration) return char;
+            if (char === ' ') return ' ';
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join('');
+
+          iteration += 1.5;
+
+          if (iteration >= maxIterations) {
+            clearInterval(scrambleInterval);
+            element.innerText = finalString;
+            if (callback) callback();
+          }
+        }, interval);
       }
-    }, interval);
-  }
 
-  let i = 0;
-  function processLog() {
-    if (i < loaderLogs.length) {
-      const log = loaderLogs[i];
-      const p = document.createElement('p');
-      if (log.type) p.classList.add(log.type);
-      logContainer.appendChild(p);
-      
-      if (log.glitch) glitchLayer.classList.add('glitch-active');
-      if (log.stopGlitch) glitchLayer.classList.remove('glitch-active');
-      
-      const isCracking = log.text.includes("Decrypting") || log.text.includes("BRUTE FORCE") || log.text.includes("password");
-      const scrambleTime = isCracking ? Math.min(log.delay - 100, 800) : Math.min(log.delay - 50, 200);
-      
-      scrambleText(p, log.text, scrambleTime, () => {
-        i++;
-        setTimeout(processLog, Math.max(50, log.delay - scrambleTime));
+      let i = 0;
+      function processLog() {
+        if (i < loaderLogs.length) {
+          const log = loaderLogs[i];
+          const p = document.createElement('p');
+          if (log.type) p.classList.add(log.type);
+          logContainer.appendChild(p);
+
+          if (log.glitch) glitchLayer.classList.add('glitch-active');
+          if (log.stopGlitch) glitchLayer.classList.remove('glitch-active');
+
+          const isCracking = log.text.includes("Decrypting") || log.text.includes("BRUTE FORCE") || log.text.includes("password");
+          const scrambleTime = isCracking ? Math.min(log.delay - 100, 800) : Math.min(log.delay - 50, 200);
+
+          scrambleText(p, log.text, scrambleTime, () => {
+            i++;
+            setTimeout(processLog, Math.max(50, log.delay - scrambleTime));
+          });
+        } else {
+          setTimeout(() => {
+            loader.classList.add('loader-hidden');
+            document.body.style.overflow = '';
+            lenis.start();
+            ScrollTrigger.refresh();
+
+            // Initial Mount Animations
+            gsap.to('#main-nav', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
+
+            gsap.from('.reveal-line', {
+              y: 100, rotateX: -45, opacity: 0,
+              duration: 1, stagger: 0.1, ease: 'power3.out', transformOrigin: '0% 50% -50'
+            });
+
+            gsap.from('.gsap-btn-stagger .magnetic-container', {
+              y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.5
+            });
+
+            gsap.from('.scroll-badge', {
+              scale: 0, opacity: 0, duration: 1.1, ease: 'back.out(1.6)', delay: 0.9
+            });
+
+          }, 800);
+        }
+      }
+
+      // Set initial states before loader finishes
+      gsap.set('#main-nav', { y: -50, opacity: 0 });
+      setTimeout(processLog, 400);
+
+      // Initialize GSAP
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. SMOOTH SCROLL ENGINE (Lenis)
+      // lerp mode gives weighty, buttery inertia — every wheel tick glides instead of snapping.
+      const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      history.scrollRestoration = 'manual';
+
+      const lenis = new Lenis({
+        lerp: REDUCED ? 1 : 0.09,
+        wheelMultiplier: 1.05,
+        touchMultiplier: 1.7,
+        gestureOrientation: 'vertical',
+        syncTouch: false,
+        autoRaf: false
       });
-    } else {
-      setTimeout(() => {
-        loader.classList.add('loader-hidden');
-        document.body.style.overflow = '';
-        lenis.start();
-        ScrollTrigger.refresh();
+      lenis.stop(); // held until the terminal loader finishes booting
 
-        // Initial Mount Animations
-        gsap.to('#main-nav', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
-        
-        gsap.from('.reveal-line', {
-          y: 100, rotateX: -45, opacity: 0,
-          duration: 1, stagger: 0.1, ease: 'power3.out', transformOrigin: '0% 50% -50'
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+      ScrollTrigger.config({ ignoreMobileResize: true });
+
+      // 1.5 Smooth Anchor Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId && targetId !== '#') {
+            // Clear the fixed nav so the section kicker isn't swallowed by it
+            const navOffset = document.getElementById('main-nav').offsetHeight + 26;
+            lenis.scrollTo(targetId, {
+              offset: -navOffset,
+              duration: 1.2,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // Expo ease out
+            });
+          }
+        });
+      });
+
+      // 1.6 VELOCITY HUB — Lenis feeds energy into the whole page
+      const progressBar = document.getElementById('progress-bar');
+      const navEl = document.getElementById('main-nav');
+      const toTop = document.getElementById('toTop');
+      const setProgress = gsap.quickSetter(progressBar, 'scaleX');
+
+      // Circular gauge on the back-to-top button
+      const ringTrace = document.querySelector('.toTop-ring .trace');
+      let ringLen = 0;
+      if (ringTrace) {
+        ringLen = 2 * Math.PI * ringTrace.r.baseVal.value;
+        ringTrace.style.strokeDasharray = ringLen + ' ' + ringLen;
+        ringTrace.style.strokeDashoffset = ringLen;
+      }
+
+      let navHidden = false;
+      let scrollVel = 0;
+
+      lenis.on('scroll', (e) => {
+        const { scroll, limit, velocity, direction } = e;
+        scrollVel = velocity;
+        const p = limit > 0 ? Math.min(1, Math.max(0, scroll / limit)) : 0;
+        setProgress(p);
+        if (ringTrace) ringTrace.style.strokeDashoffset = ringLen * (1 - p);
+
+        navEl.classList.toggle('scrolled', scroll > 80);
+        toTop.classList.toggle('visible', scroll > window.innerHeight * 1.2);
+
+        if (scroll > 180 && direction === 1 && !navHidden) {
+          navHidden = true;
+          gsap.to(navEl, { y: -120, duration: 0.55, ease: 'power3.out', overwrite: true });
+        } else if (direction === -1 && navHidden) {
+          navHidden = false;
+          gsap.to(navEl, { y: 0, duration: 0.6, ease: 'power3.out', overwrite: true });
+        }
+      });
+
+      // 1.7 ACTIVE SECTION PILL — the nav mirrors where the scroll is
+      const navLinks = gsap.utils.toArray('.nav-links a');
+      const navPill = document.querySelector('.nav-pill');
+      let activeNavLink = null;
+
+      function placeNavPill(link, animate) {
+        if (!navPill) return;
+        if (!link) {
+          gsap.to(navPill, { opacity: 0, duration: REDUCED ? 0 : 0.3, overwrite: true });
+          return;
+        }
+        const vars = {
+          x: link.offsetLeft,
+          width: link.offsetWidth,
+          opacity: 1,
+          overwrite: true
+        };
+        if (animate && !REDUCED) {
+          gsap.to(navPill, Object.assign({ duration: 0.55, ease: 'power3.out' }, vars));
+        } else {
+          gsap.set(navPill, vars);
+        }
+      }
+
+      function setActiveNavLink(link) {
+        if (link === activeNavLink) return;
+        activeNavLink = link;
+        navLinks.forEach(l => l.classList.toggle('is-active', l === link));
+        placeNavPill(link, true);
+      }
+
+      const navSections = ['profile', 'journey', 'projects', 'certificates']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      // Derived from the live scroll position, so the pill never goes stale
+      let navClickLock = 0;
+
+      function syncActiveNav() {
+        if (performance.now() < navClickLock) return; // let an anchor glide finish first
+        const probe = window.scrollY + window.innerHeight * 0.45;
+        let current = null;
+
+        for (const sec of navSections) {
+          const top = sec.getBoundingClientRect().top + window.scrollY;
+          if (probe >= top && probe < top + sec.offsetHeight) { current = sec; break; }
+        }
+
+        setActiveNavLink(current ? navLinks.find(l => l.getAttribute('href') === '#' + current.id) || null : null);
+      }
+
+      lenis.on('scroll', syncActiveNav);
+      syncActiveNav();
+
+      navLinks.forEach(link => link.addEventListener('click', () => {
+        navClickLock = performance.now() + 1500;
+        setActiveNavLink(link);
+      }));
+
+      let navResizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(navResizeTimer);
+        navResizeTimer = setTimeout(() => placeNavPill(activeNavLink, false), 160);
+      });
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => placeNavPill(activeNavLink, false));
+      }
+
+      // 2. Custom Magnetic Cursor
+      if (window.matchMedia('(pointer: fine)').matches) {
+        const dot = document.querySelector('.cursor-dot');
+        const ring = document.querySelector('.cursor-ring');
+
+        const setXDot = gsap.quickSetter(dot, "x", "px");
+        const setYDot = gsap.quickSetter(dot, "y", "px");
+        const setXRing = gsap.quickSetter(ring, "x", "px");
+        const setYRing = gsap.quickSetter(ring, "y", "px");
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX; mouseY = e.clientY;
+          setXDot(mouseX); setYDot(mouseY);
         });
 
-        gsap.from('.gsap-btn-stagger .magnetic-container', {
-          y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.5
+        gsap.ticker.add(() => {
+          ringX += (mouseX - ringX) * 0.15;
+          ringY += (mouseY - ringY) * 0.15;
+          setXRing(ringX); setYRing(ringY);
         });
 
-        gsap.from('.scroll-badge', {
-          scale: 0, opacity: 0, duration: 1.1, ease: 'back.out(1.6)', delay: 0.9
+        // Nav links stay put so the active-section pill can track them cleanly
+        const magnetics = [...document.querySelectorAll('.magnetic')].filter(el => !el.closest('.nav-links'));
+        magnetics.forEach(el => {
+          el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+            gsap.to(el, { x: x, y: y, duration: 0.5, ease: 'power3.out' });
+            ring.style.width = '60px';
+            ring.style.height = '60px';
+            ring.style.background = 'rgba(14, 165, 233, 0.1)';
+          });
+          el.addEventListener('mouseleave', () => {
+            gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
+            ring.style.width = '40px';
+            ring.style.height = '40px';
+            ring.style.background = 'transparent';
+          });
         });
 
-      }, 800);
-    }
-  }
-  
-  // Set initial states before loader finishes
-  gsap.set('#main-nav', { y: -50, opacity: 0 });
-  setTimeout(processLog, 400);
-
-  // Initialize GSAP
-  gsap.registerPlugin(ScrollTrigger);
-
-  // 1. SMOOTH SCROLL ENGINE (Lenis)
-  // lerp mode gives weighty, buttery inertia — every wheel tick glides instead of snapping.
-  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  history.scrollRestoration = 'manual';
-
-  const lenis = new Lenis({
-    lerp: REDUCED ? 1 : 0.09,
-    wheelMultiplier: 1.05,
-    touchMultiplier: 1.7,
-    gestureOrientation: 'vertical',
-    syncTouch: false,
-    autoRaf: false
-  });
-  lenis.stop(); // held until the terminal loader finishes booting
-
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time)=>{ lenis.raf(time * 1000); });
-  gsap.ticker.lagSmoothing(0);
-  ScrollTrigger.config({ ignoreMobileResize: true });
-
-  // 1.5 Smooth Anchor Scrolling
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId && targetId !== '#') {
-        lenis.scrollTo(targetId, { 
-          duration: 1.2, 
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // Expo ease out
+        // Ring reacts to any interactive element
+        const growSel = 'a, button, .tech-pill, .project-tags span, .cert-eye';
+        document.addEventListener('mouseover', (e) => {
+          if (e.target.closest(growSel)) ring.classList.add('grow');
+        });
+        document.addEventListener('mouseout', (e) => {
+          if (e.target.closest(growSel)) ring.classList.remove('grow');
         });
       }
-    });
-  });
 
-  // 1.6 VELOCITY HUB — Lenis feeds energy into the whole page
-  const progressBar = document.getElementById('progress-bar');
-  const navEl = document.getElementById('main-nav');
-  const toTop = document.getElementById('toTop');
-  const setProgress = gsap.quickSetter(progressBar, 'scaleX');
-  const velCards = gsap.utils.toArray('.bento-card, .card-3d');
-
-  let navHidden = false;
-  let lastSkew = 0, skewTarget = 0;
-  let scrollVel = 0;
-
-  lenis.on('scroll', (e) => {
-    const { scroll, limit, velocity, direction } = e;
-    scrollVel = velocity;
-    setProgress(limit > 0 ? Math.min(1, Math.max(0, scroll / limit)) : 0);
-
-    navEl.classList.toggle('scrolled', scroll > 80);
-    toTop.classList.toggle('visible', scroll > window.innerHeight * 1.2);
-
-    if (scroll > 180 && direction === 1 && !navHidden) {
-      navHidden = true;
-      gsap.to(navEl, { y: -120, duration: 0.55, ease: 'power3.out', overwrite: true });
-    } else if (direction === -1 && navHidden) {
-      navHidden = false;
-      gsap.to(navEl, { y: 0, duration: 0.6, ease: 'power3.out', overwrite: true });
-    }
-
-    if (!REDUCED) skewTarget = gsap.utils.clamp(-5, 5, velocity * 0.07);
-  });
-
-  // Cards shear slightly with scroll speed, then settle — classic butter feel
-  gsap.ticker.add(() => {
-    skewTarget += (0 - skewTarget) * 0.06;
-    lastSkew += (skewTarget - lastSkew) * 0.1;
-    if (Math.abs(lastSkew) > 0.02) {
-      gsap.set(velCards, { skewY: lastSkew, transformOrigin: '50% 100%' });
-    } else if (lastSkew !== 0) {
-      gsap.set(velCards, { skewY: 0 });
-      lastSkew = 0;
-    }
-  });
-
-  // Aurora blobs breathe brighter when you scroll fast
-  const setBlobGlow = gsap.quickSetter('.blob', 'opacity');
-  lenis.on('scroll', (e) => {
-    setBlobGlow(0.3 + Math.min(Math.abs(e.velocity) * 0.01, 0.22));
-  });
-
-  // 2. Custom Magnetic Cursor
-  if (window.matchMedia('(pointer: fine)').matches) {
-    const dot = document.querySelector('.cursor-dot');
-    const ring = document.querySelector('.cursor-ring');
-    
-    const setXDot = gsap.quickSetter(dot, "x", "px");
-    const setYDot = gsap.quickSetter(dot, "y", "px");
-    const setXRing = gsap.quickSetter(ring, "x", "px");
-    const setYRing = gsap.quickSetter(ring, "y", "px");
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      setXDot(mouseX); setYDot(mouseY);
-    });
-
-    gsap.ticker.add(() => {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      setXRing(ringX); setYRing(ringY);
-    });
-
-    const magnetics = document.querySelectorAll('.magnetic');
-    magnetics.forEach(el => {
-      el.addEventListener('mousemove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
-        const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
-        gsap.to(el, { x: x, y: y, duration: 0.5, ease: 'power3.out' });
-        ring.style.width = '60px';
-        ring.style.height = '60px';
-        ring.style.background = 'rgba(14, 165, 233, 0.1)';
-      });
-      el.addEventListener('mouseleave', () => {
-        gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
-        ring.style.width = '40px';
-        ring.style.height = '40px';
-        ring.style.background = 'transparent';
-      });
-    });
-
-    // Ring reacts to any interactive element
-    const growSel = 'a, .tech-pill, .project-tags span';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(growSel)) ring.classList.add('grow');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(growSel)) ring.classList.remove('grow');
-    });
-  }
-
-  // 2.5 Card Spotlight — a soft light following the cursor across glass
-  if (window.matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.bento-card, .card-3d').forEach((card) => {
-      card.classList.add('spot');
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
-  }
-
-  // 3. Text Reveal Animations
-  const splitTexts = document.querySelectorAll('.reveal-text');
-  splitTexts.forEach(text => {
-    const split = new SplitType(text, { types: 'lines, words' });
-    gsap.from(split.words, {
-      scrollTrigger: { trigger: text, start: 'top 90%' },
-      duration: 1, y: 40, opacity: 0, stagger: 0.02, ease: 'power3.out'
-    });
-  });
-
-  const manualReveals = document.querySelectorAll('h2.reveal-hero, h1.reveal-hero');
-  manualReveals.forEach(text => {
-    const lines = text.querySelectorAll('.reveal-line');
-    if(text.tagName === 'H2') {
-      gsap.from(lines, {
-        scrollTrigger: { trigger: text, start: 'top 90%' },
-        duration: 1, y: 80, rotateX: -45, opacity: 0, stagger: 0.1, ease: 'power3.out', transformOrigin: '0% 50% -50'
-      });
-    }
-  });
-
-  // 4. 3D Scroll Animations for Cards (incl Bento)
-  const cards = document.querySelectorAll('.card-3d, .bento-card');
-  cards.forEach((card, i) => {
-    gsap.fromTo(card, 
-      { y: 150, z: -200, rotateX: 10, opacity: 0 },
-      {
-        scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 50%', scrub: 1 },
-        y: 0, z: 0, rotateX: 0, opacity: 1, ease: 'power2.out'
+      // 2.5 Card Spotlight — a soft light following the cursor across glass
+      if (window.matchMedia('(pointer: fine)').matches) {
+        document.querySelectorAll('.bento-card, .card-3d').forEach((card) => {
+          card.classList.add('spot');
+          card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+            card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+          });
+        });
       }
-    );
-  });
 
-  // Inner content stagger for Bento cards
-  document.querySelectorAll('.bento-card, .project-card > div:first-child').forEach(container => {
-    const inners = container.querySelectorAll('.gsap-inner');
-    if (inners.length > 0) {
-      gsap.from(inners, {
-        scrollTrigger: { trigger: container, start: 'top 90%' },
-        y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out'
+      // 2.6 3D TILT — project visuals lean toward the pointer under a moving glare
+      if (window.matchMedia('(pointer: fine)').matches && !REDUCED) {
+        document.querySelectorAll('.project-visual').forEach((visual) => {
+          visual.classList.add('tiltable');
+          gsap.set(visual, { transformPerspective: 900, transformOrigin: '50% 50%' });
+
+          const rotX = gsap.quickTo(visual, 'rotationX', { duration: 0.65, ease: 'power3.out' });
+          const rotY = gsap.quickTo(visual, 'rotationY', { duration: 0.65, ease: 'power3.out' });
+          const host = visual.closest('.project-card') || visual;
+
+          host.addEventListener('mousemove', (e) => {
+            const r = visual.getBoundingClientRect();
+            const px = gsap.utils.clamp(0, 1, (e.clientX - r.left) / r.width);
+            const py = gsap.utils.clamp(0, 1, (e.clientY - r.top) / r.height);
+            rotY((px - 0.5) * 11);
+            rotX(-(py - 0.5) * 8);
+            visual.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+            visual.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+          });
+
+          host.addEventListener('mouseleave', () => {
+            rotX(0);
+            rotY(0);
+          });
+        });
+      }
+
+      // 3. Text Reveal Animations — below-fold copy is lit word-by-word by the scroll
+      const splitTexts = document.querySelectorAll('.reveal-text');
+      const scrubLitTexts = new Set(document.querySelectorAll('#journey p.reveal-text, #certificates p.reveal-text, #contact p.reveal-text'));
+
+      splitTexts.forEach(text => {
+        const split = new SplitType(text, { types: 'lines, words' });
+
+        // Deep-page copy: words ignite one after another as the reader scrolls
+        if (!REDUCED && scrubLitTexts.has(text)) {
+          text.classList.add('scrub-lit');
+          gsap.fromTo(split.words,
+            { opacity: 0.2 },
+            {
+              opacity: 1, ease: 'none', stagger: 0.14,
+              scrollTrigger: { trigger: text, start: 'top 88%', end: 'bottom 55%', scrub: 0.5 }
+            });
+          return;
+        }
+
+        gsap.from(split.words, {
+          scrollTrigger: { trigger: text, start: 'top 90%' },
+          duration: 1, y: 40, opacity: 0, stagger: 0.02, ease: 'power3.out'
+        });
       });
-    }
-  });
 
-  // Stagger for tech pills inside bento
-  document.querySelectorAll('.gsap-stagger-pills').forEach(container => {
-    const pills = container.querySelectorAll('.tech-pill');
-    gsap.from(pills, {
-      scrollTrigger: { trigger: container, start: 'top 90%' },
-      scale: 0.8, opacity: 0, duration: 0.6, stagger: 0.05, ease: 'back.out(1.5)'
+      const manualReveals = document.querySelectorAll('h2.reveal-hero, h1.reveal-hero');
+      manualReveals.forEach(text => {
+        const lines = text.querySelectorAll('.reveal-line');
+        if (text.tagName === 'H2') {
+          gsap.from(lines, {
+            scrollTrigger: { trigger: text, start: 'top 90%' },
+            duration: 1, y: 80, rotateX: -45, opacity: 0, stagger: 0.1, ease: 'power3.out', transformOrigin: '0% 50% -50'
+          });
+        }
+      });
+
+      // 4. 3D Scroll Animations for Cards (incl Bento)
+      const cards = document.querySelectorAll('.card-3d, .bento-card');
+      cards.forEach((card, i) => {
+        gsap.fromTo(card,
+          { y: 150, z: -200, rotateX: 10, opacity: 0 },
+          {
+            scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 50%', scrub: 1 },
+            y: 0, z: 0, rotateX: 0, opacity: 1, ease: 'power2.out'
+          }
+        );
+      });
+
+      // Inner content stagger for Bento cards
+      document.querySelectorAll('.bento-card, .project-card > div:first-child').forEach(container => {
+        const inners = container.querySelectorAll('.gsap-inner');
+        if (inners.length > 0) {
+          gsap.from(inners, {
+            scrollTrigger: { trigger: container, start: 'top 90%' },
+            y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out'
+          });
+        }
+      });
+
+      // Stagger for tech pills inside bento
+      document.querySelectorAll('.gsap-stagger-pills').forEach(container => {
+        const pills = container.querySelectorAll('.tech-pill');
+        gsap.from(pills, {
+          scrollTrigger: { trigger: container, start: 'top 90%' },
+          scale: 0.8, opacity: 0, duration: 0.6, stagger: 0.05, ease: 'back.out(1.5)'
+        });
+      });
+
+      // 4.5 Staggered Reveal for Tech Tags in Projects
+      const projectTagsContainers = document.querySelectorAll('.project-tags');
+      projectTagsContainers.forEach(container => {
+        const tags = container.querySelectorAll('.tag-anim');
+        gsap.from(tags, {
+          scrollTrigger: { trigger: container, start: 'top 95%' },
+          y: 20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'back.out(1.5)'
+        });
+      });
+
+      // 4.6 Animated Counters
+      document.querySelectorAll('.counter-num').forEach((el) => {
+        const end = parseInt(el.dataset.count, 10) || 0;
+        const obj = { v: 0 };
+        gsap.to(obj, {
+          v: end,
+          duration: 2.2,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          onUpdate: () => { el.textContent = String(Math.round(obj.v)).padStart(2, '0') + '+'; }
+        });
+      });
+
+      // 4.7 Kinetic Marquee — direction & speed ride the Lenis velocity
+      const marqueeTweens = [];
+      gsap.utils.toArray('.marquee-track').forEach((track, idx) => {
+        const dir = track.dataset.dir === '-1' ? -1 : 1;
+        if (!REDUCED) {
+          marqueeTweens.push(gsap.fromTo(track,
+            { xPercent: dir === 1 ? 0 : -50 },
+            { xPercent: dir === 1 ? -50 : 0, duration: idx === 0 ? 46 : 58, ease: 'none', repeat: -1 }
+          ));
+        }
+      });
+
+      if (marqueeTweens.length) {
+        let idleTimer;
+        lenis.on('scroll', ({ velocity, direction }) => {
+          const sign = direction === -1 ? -1 : 1;
+          const boost = gsap.utils.clamp(1, 3.4, 1 + Math.abs(velocity) * 0.08);
+          marqueeTweens.forEach((tw) => gsap.to(tw, { timeScale: sign * boost, duration: 0.4, overwrite: true }));
+          clearTimeout(idleTimer);
+          idleTimer = setTimeout(() => {
+            marqueeTweens.forEach((tw) => gsap.to(tw, { timeScale: 1, duration: 1.4, overwrite: true }));
+          }, 240);
+        });
+
+        gsap.from('.marquee-row', {
+          scrollTrigger: { trigger: '.marquee-strip', start: 'top 95%' },
+          y: 70, opacity: 0, stagger: 0.15, duration: 1, ease: 'power3.out'
+        });
+      }
+
+      // 4.8 Back To Top — buttery lift home
+      toTop.addEventListener('click', () => {
+        lenis.scrollTo(0, { duration: 1.6, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      });
+
+      // 5. Parallax Hero Elements
+      gsap.to('.hero-content', {
+        scrollTrigger: { trigger: '.hero-content', start: 'top top', end: 'bottom top', scrub: true },
+        y: 150, opacity: 0, scale: 0.95
+      });
+
+      // 5.1 Layered depth — kicker and buttons separate from the dissolving hero
+      if (!REDUCED) {
+        gsap.to('.hero-content > .mono', {
+          yPercent: -55, ease: 'none',
+          scrollTrigger: { trigger: '.hero-content', start: 'top top', end: 'bottom top', scrub: 1 }
+        });
+
+        gsap.to('.hero-btns', {
+          y: 46, ease: 'none',
+          scrollTrigger: { trigger: '.hero-content', start: 'top top', end: 'bottom top', scrub: 1 }
+        });
+
+        gsap.to('.scroll-badge', {
+          opacity: 0, y: 50, ease: 'none',
+          scrollTrigger: { trigger: '.scroll-badge', start: 'top 70%', end: 'top 25%', scrub: true }
+        });
+      }
+
+      // 6. 3D Revolving Background Object
+      const canvas = document.getElementById('bg-canvas');
+      if (canvas && window.THREE) {
+        try {
+          const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+          camera.position.z = 15;
+
+          // Elegant wireframe TorusKnot with Cyan color
+          const geometry = new THREE.TorusKnotGeometry(5, 1.5, 120, 20);
+          const material = new THREE.MeshBasicMaterial({ color: 0x0EA5E9, wireframe: true, transparent: true, opacity: 0.25 });
+          const mesh = new THREE.Mesh(geometry, material);
+          scene.add(mesh);
+
+          window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+          });
+
+          gsap.to(mesh.rotation, {
+            y: Math.PI * 3, x: Math.PI * 1.5,
+            scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.5 }
+          });
+
+          gsap.ticker.add(() => {
+            mesh.rotation.z += 0.001 + Math.min(Math.abs(scrollVel) * 0.0004, 0.02);
+            camera.position.z += ((15 - Math.min(Math.abs(scrollVel) * 0.06, 1.4)) - camera.position.z) * 0.07;
+            renderer.render(scene, camera);
+          });
+        } catch (err) {
+          // No WebGL / lost context: keep the scroll animations and modals alive
+          console.warn('3D backdrop disabled:', err && err.message ? err.message : err);
+        }
+      }
+
+      // ================= 7. JOURNEY — scroll-lit flight path =================
+      const tlRailFill = document.querySelector('.rail-fill');
+      if (tlRailFill) {
+        const railSpark = document.querySelector('.rail-spark');
+        const railEl = document.querySelector('.rail');
+
+        const moveSpark = (self) => {
+          if (!railSpark || !railEl) return;
+          railSpark.style.top = (self.progress * railEl.offsetHeight) + 'px';
+          railSpark.classList.toggle('on', self.progress > 0.002 && self.progress < 0.999);
+        };
+
+        gsap.fromTo(tlRailFill, { scaleY: 0 }, {
+          scaleY: 1, ease: 'none',
+          scrollTrigger: {
+            trigger: '.timeline', start: 'top 72%', end: 'bottom 78%', scrub: 0.6,
+            onUpdate: moveSpark,
+            onRefresh: moveSpark,
+            onLeave: () => railSpark && railSpark.classList.remove('on'),
+            onLeaveBack: () => railSpark && railSpark.classList.remove('on')
+          }
+        });
+
+        document.querySelectorAll('.tl-item').forEach((item) => {
+          const fromLeft = item.dataset.side !== 'r';
+          const card = item.querySelector('.tl-card');
+          if (card) {
+            gsap.from(card, {
+              scrollTrigger: { trigger: item, start: 'top 82%' },
+              x: fromLeft ? -70 : 70,
+              y: 40,
+              opacity: 0,
+              rotateY: fromLeft ? -7 : 7,
+              duration: 1.05,
+              ease: 'power3.out',
+              clearProps: 'transform'
+            });
+          }
+          ScrollTrigger.create({
+            trigger: item,
+            start: 'top 62%',
+            onEnter: () => item.classList.add('lit'),
+            onLeaveBack: () => item.classList.remove('lit')
+          });
+        });
+      }
+
+      // ================= 8. LIQUID GLASS MODAL SYSTEM =================
+      const modalRoot = document.getElementById('modal-root');
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const modalBloom = document.getElementById('modal-bloom');
+      const modalPanel = document.getElementById('modal-panel');
+      const modalBody = document.getElementById('modal-body');
+      const modalKicker = document.getElementById('modal-kicker');
+      const modalName = document.getElementById('modal-name');
+      const modalCloseBtn = document.getElementById('modal-close');
+
+      let modalOpen = false;
+      let modalAnimating = false;
+      let modalLastFocus = null;
+      let resumeToken = 0;
+
+      function openModal(opts, ev) {
+        if (modalOpen || modalAnimating) return;
+        modalOpen = true;
+        modalAnimating = true;
+        modalLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+        modalKicker.textContent = opts.kicker || 'Credential';
+        modalName.textContent = opts.name || '';
+        modalBody.innerHTML = opts.html || '';
+        modalBody.scrollTop = 0;
+
+        // Bloom radiates from the click origin (i.e. the card you tapped)
+        const ox = (ev && ev.clientX) ? ev.clientX : window.innerWidth / 2;
+        const oy = (ev && ev.clientY) ? ev.clientY : window.innerHeight * 0.42;
+        modalBloom.style.left = ox + 'px';
+        modalBloom.style.top = oy + 'px';
+
+        modalRoot.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        lenis.stop();
+
+        const fast = REDUCED;
+        requestAnimationFrame(() => {
+          modalBackdrop.classList.add('on');
+
+          gsap.fromTo(modalBloom,
+            { scale: 0.2, opacity: 0.9 },
+            { scale: 1.12, opacity: 0, duration: fast ? 0.2 : 1.1, ease: 'power2.out' });
+
+          gsap.fromTo(modalPanel,
+            { y: 70, scale: 0.9, rotateX: 9, opacity: 0 },
+            {
+              y: 0, scale: 1, rotateX: 0, opacity: 1,
+              duration: fast ? 0.15 : 0.85, ease: 'expo.out',
+              onComplete: () => {
+                modalAnimating = false;
+                if (opts.onMount) opts.onMount();
+              }
+            });
+
+          gsap.from(modalBody.children, {
+            y: 26, opacity: 0,
+            duration: fast ? 0.15 : 0.7, stagger: fast ? 0 : 0.08,
+            ease: 'power3.out', delay: fast ? 0 : 0.16
+          });
+        });
+
+        modalCloseBtn.focus({ preventScroll: true });
+      }
+
+      function closeModal() {
+        if (!modalOpen || modalAnimating) return;
+        modalAnimating = true;
+        resumeToken++;
+        const fast = REDUCED;
+
+        gsap.to(modalPanel, {
+          y: 46, scale: 0.94, rotateX: 6, opacity: 0,
+          transformOrigin: '50% 100%',
+          duration: fast ? 0.1 : 0.42, ease: 'power2.inOut'
+        });
+        gsap.to(modalBloom, { opacity: 0, duration: 0.2 });
+
+        setTimeout(() => {
+          modalBackdrop.classList.remove('on');
+          gsap.to(modalBackdrop, {
+            opacity: 0, duration: fast ? 0.1 : 0.45, ease: 'power1.in',
+            onComplete: () => {
+              modalRoot.style.display = 'none';
+              modalBody.innerHTML = '';
+              gsap.set(modalBackdrop, { opacity: 1, clearProps: 'opacity' });
+              if (modalLastFocus && modalLastFocus.focus) modalLastFocus.focus({ preventScroll: true });
+              document.body.style.overflow = '';
+              lenis.start();
+              modalOpen = false;
+              modalAnimating = false;
+            }
+          });
+        }, fast ? 60 : 300);
+      }
+
+      modalCloseBtn.addEventListener('click', closeModal);
+      modalRoot.addEventListener('mousedown', (e) => {
+        if (modalOpen && !modalAnimating && !modalPanel.contains(e.target)) closeModal();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOpen) closeModal();
+      });
+
+      // ---- 8.1 Certificates: paper replica in glass ----
+      function buildCertSheet(d) {
+        const acc = d.acc || '1';
+        return `
+          <div class="cert-sheet acc-${acc}">
+            <div class="cert-seal"><span>${d.seal || 'VS'}</span></div>
+            <div class="mono cert-kicker">Certificate of Achievement · ${d.date || ''}</div>
+            <h3 class="cert-title">${d.title || ''}</h3>
+            <p class="cert-by">awarded to <b>Vikram Singh</b> and verified by <b>${d.issuer || 'the issuer'}</b>.</p>
+            <div class="cert-chips">
+              <span class="cert-chip">${d.issuer || ''}</span>
+              <span class="cert-chip grade">${d.grade || 'Certified'}</span>
+              <span class="cert-chip">ID · ${d.id || 'VS-0000'}</span>
+            </div>
+            <div class="cert-foot">
+              <span class="mono">TAP &times; TO CLOSE · ORIGINAL LIVES ON THE ISSUER SITE</span>
+              <a class="pdf-pill primary" href="${d.url || '#'}" target="_blank" rel="noopener">Verify original&nbsp;↗</a>
+            </div>
+          </div>`;
+      }
+
+      document.querySelectorAll('.cert-card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal({
+            kicker: 'Credential',
+            name: card.dataset.title || 'Certificate',
+            html: buildCertSheet(card.dataset)
+          }, e);
+        });
+      });
+
+      // ---- 8.2 Resume: PDF.js liquid reader, no page redirects ----
+      function buildResumeShell() {
+        return `
+          <div class="pdf-toolbar">
+            <span class="pdf-pill" id="rv-zoom-out" role="button" tabindex="0">−</span>
+            <span class="pdf-meta" id="rv-meta">100%</span>
+            <span class="pdf-pill" id="rv-zoom-in" role="button" tabindex="0">+</span>
+            <span class="pdf-sep"></span>
+            <span class="pdf-pill" id="rv-prev" role="button" tabindex="0">↑ Prev</span>
+            <span class="pdf-meta" id="rv-page">•</span>
+            <span class="pdf-pill" id="rv-next" role="button" tabindex="0">Next ↓</span>
+            <span class="pdf-sep"></span>
+            <a class="pdf-pill primary" href="Vikram_Singh_CV.pdf" download="Vikram_Singh_CV.pdf">↓ Download CV</a>
+            <a class="pdf-pill" href="https://docs.google.com/document/d/1XPWmjBpT9VAv2XP0i6pFRkJR-Y_n2NbN/edit?usp=sharing&ouid=112699414269592164020&rtpof=true&sd=true" target="_blank" rel="noopener">Google Doc ↗</a>
+          </div>
+          <div class="pdf-viewport" id="rv-viewport" data-lenis-prevent>
+            <div class="pdf-loading">rendering resume…</div>
+          </div>`;
+      }
+
+      async function bootResume() {
+        const viewport = document.getElementById('rv-viewport');
+        if (!viewport) return;
+        const token = ++resumeToken;
+        let level = window.rvZoomLevel || 1;
+
+        const meta = document.getElementById('rv-meta');
+        const pageMeta = document.getElementById('rv-page');
+        const fitWidth = Math.min(720, Math.max(320, viewport.clientWidth - 24));
+
+        try {
+          if (!window.pdfjsLib) throw new Error('pdfjs unavailable');
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          const doc = await pdfjsLib.getDocument('Vikram_Singh_CV.pdf').promise;
+          if (token !== resumeToken || !modalOpen) return;
+
+          viewport.innerHTML = '';
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const pages = [];
+
+          for (let p = 1; p <= doc.numPages; p++) {
+            const page = await doc.getPage(p);
+            if (token !== resumeToken || !modalOpen) return;
+            const base = page.getViewport({ scale: 1 });
+            const scale = (fitWidth / base.width) * level;
+            const vp = page.getViewport({ scale });
+
+            const wrap = document.createElement('div');
+            wrap.className = 'pdf-page';
+            wrap.innerHTML = `<div class="pdf-pagelabel">Page ${p} / ${doc.numPages}</div>`;
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.floor(vp.width * dpr);
+            canvas.height = Math.floor(vp.height * dpr);
+            wrap.appendChild(canvas);
+            viewport.appendChild(wrap);
+            pages.push({ page, base, wrap, canvas });
+
+            await page.render({
+              canvasContext: canvas.getContext('2d'),
+              viewport: vp,
+              transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null
+            }).promise;
+            canvas.classList.add('ready');
+          }
+
+          window.rvDoc = doc;
+          if (meta) meta.textContent = Math.round(level * 100) + '%';
+          if (pageMeta) pageMeta.textContent = '1 / ' + doc.numPages;
+
+          // page indicator follows the scroll
+          viewport.addEventListener('scroll', () => {
+            const mid = viewport.scrollTop + viewport.clientHeight * 0.35;
+            let cur = 1;
+            pages.forEach((pw, idx) => {
+              if (pw.wrap.offsetTop <= mid) cur = idx + 1;
+            });
+            if (pageMeta) pageMeta.textContent = cur + ' / ' + doc.numPages;
+          });
+
+          const goPage = (dir) => {
+            const cur = parseInt(pageMeta.textContent, 10) || 1;
+            const next = Math.min(doc.numPages, Math.max(1, cur + dir));
+            if (pages[next - 1]) pages[next - 1].wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          };
+          const prevBtn = document.getElementById('rv-prev');
+          const nextBtn = document.getElementById('rv-next');
+          prevBtn && (prevBtn.onclick = () => goPage(-1));
+          nextBtn && (nextBtn.onclick = () => goPage(1));
+
+          const reRender = async () => {
+            const t2 = ++resumeToken;
+            for (let i = 0; i < pages.length; i++) {
+              if (t2 !== resumeToken || !modalOpen) return;
+              const scale = (fitWidth / pages[i].base.width) * level;
+              const vp = pages[i].page.getViewport({ scale });
+              const canvas = pages[i].canvas;
+              canvas.classList.remove('ready');
+              canvas.width = Math.floor(vp.width * dpr);
+              canvas.height = Math.floor(vp.height * dpr);
+              await pages[i].page.render({
+                canvasContext: canvas.getContext('2d'),
+                viewport: vp,
+                transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null
+              }).promise;
+              canvas.classList.add('ready');
+            }
+            if (meta) meta.textContent = Math.round(level * 100) + '%';
+            window.rvZoomLevel = level;
+          };
+
+          const zOut = document.getElementById('rv-zoom-out');
+          const zIn = document.getElementById('rv-zoom-in');
+          const step = (d) => {
+            level = Math.min(1.75, Math.max(0.55, level + d));
+            reRender();
+          };
+          zOut && (zOut.onclick = () => step(-0.15));
+          zIn && (zIn.onclick = () => step(0.15));
+
+        } catch (err) {
+          // Graceful fallback: direct embed keeps the CV on-page even offline / file://
+          if (token !== resumeToken || !modalOpen) return;
+          viewport.innerHTML = `
+            <div class="pdf-fallback">
+              <iframe src="Vikram_Singh_CV.pdf" title="Vikram Singh CV"></iframe>
+              <span class="pdf-note">Reader fallback mode — host the site over http(s) for the full in-page reader.</span>
+            </div>`;
+        }
+      }
+
+      document.querySelectorAll('[data-open-resume]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal({
+            kicker: 'Resume · At a glance',
+            name: 'Vikram Singh — CV',
+            html: buildResumeShell(),
+            onMount: bootResume
+          }, e);
+        });
+      });
+      window.rvZoomLevel = 1;
+
     });
-  });
-
-  // 4.5 Staggered Reveal for Tech Tags in Projects
-  const projectTagsContainers = document.querySelectorAll('.project-tags');
-  projectTagsContainers.forEach(container => {
-    const tags = container.querySelectorAll('.tag-anim');
-    gsap.from(tags, {
-      scrollTrigger: { trigger: container, start: 'top 95%' },
-      y: 20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'back.out(1.5)'
-    });
-  });
-
-  // 4.6 Animated Counters
-  document.querySelectorAll('.counter-num').forEach((el) => {
-    const end = parseInt(el.dataset.count, 10) || 0;
-    const obj = { v: 0 };
-    gsap.to(obj, {
-      v: end,
-      duration: 2.2,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      onUpdate: () => { el.textContent = String(Math.round(obj.v)).padStart(2, '0') + '+'; }
-    });
-  });
-
-  // 4.7 Kinetic Marquee — direction & speed ride the Lenis velocity
-  const marqueeTweens = [];
-  gsap.utils.toArray('.marquee-track').forEach((track, idx) => {
-    const dir = track.dataset.dir === '-1' ? -1 : 1;
-    if (!REDUCED) {
-      marqueeTweens.push(gsap.fromTo(track,
-        { xPercent: dir === 1 ? 0 : -50 },
-        { xPercent: dir === 1 ? -50 : 0, duration: idx === 0 ? 46 : 58, ease: 'none', repeat: -1 }
-      ));
-    }
-  });
-
-  if (marqueeTweens.length) {
-    let idleTimer;
-    lenis.on('scroll', ({ velocity, direction }) => {
-      const sign = direction === -1 ? -1 : 1;
-      const boost = gsap.utils.clamp(1, 3.4, 1 + Math.abs(velocity) * 0.08);
-      marqueeTweens.forEach((tw) => gsap.to(tw, { timeScale: sign * boost, duration: 0.4, overwrite: true }));
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => {
-        marqueeTweens.forEach((tw) => gsap.to(tw, { timeScale: 1, duration: 1.4, overwrite: true }));
-      }, 240);
-    });
-
-    gsap.from('.marquee-row', {
-      scrollTrigger: { trigger: '.marquee-strip', start: 'top 95%' },
-      y: 70, opacity: 0, stagger: 0.15, duration: 1, ease: 'power3.out'
-    });
-  }
-
-  // 4.8 Back To Top — buttery lift home
-  toTop.addEventListener('click', () => {
-    lenis.scrollTo(0, { duration: 1.6, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-  });
-
-  // 5. Parallax Hero Elements
-  gsap.to('.hero-content', {
-    scrollTrigger: { trigger: '.hero-content', start: 'top top', end: 'bottom top', scrub: true },
-    y: 150, opacity: 0, scale: 0.95
-  });
-
-  // 6. 3D Revolving Background Object
-  const canvas = document.getElementById('bg-canvas');
-  if (canvas && window.THREE) {
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 15;
-
-    // Elegant wireframe TorusKnot with Cyan color
-    const geometry = new THREE.TorusKnotGeometry(5, 1.5, 120, 20);
-    const material = new THREE.MeshBasicMaterial({ color: 0x0EA5E9, wireframe: true, transparent: true, opacity: 0.25 });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    window.addEventListener('resize', () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-    });
-
-    gsap.to(mesh.rotation, {
-      y: Math.PI * 3, x: Math.PI * 1.5,
-      scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.5 }
-    });
-
-    gsap.ticker.add(() => {
-      mesh.rotation.z += 0.001 + Math.min(Math.abs(scrollVel) * 0.0004, 0.02);
-      camera.position.z += ((15 - Math.min(Math.abs(scrollVel) * 0.06, 1.4)) - camera.position.z) * 0.07;
-      renderer.render(scene, camera);
-    });
-  }
-
-});
-</script>
+  </script>
 </body>
+
 </html>
