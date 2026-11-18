@@ -1556,6 +1556,10 @@
       justify-content: center;
     }
 
+    .cert-doc-shot picture {
+      display: contents;
+    }
+
     .cert-doc-shot img {
       display: block;
       width: auto;
@@ -1986,6 +1990,11 @@
       cursor: zoom-in;
     }
 
+    /* Let <picture> drop out of the flow so the <img> fills the frame */
+    .project-visual.project-shot picture {
+      display: contents;
+    }
+
     .project-visual.project-shot img {
       position: absolute;
       inset: 0;
@@ -2399,9 +2408,12 @@
 
       <div class="project-visual project-shot"
         style="height: 100%; min-height: 350px; background: rgba(6, 10, 20, 0.6); border-radius: 16px; border: 1px solid rgba(14,165,233,0.2); box-shadow: inset 0 0 50px rgba(0,0,0,0.18); position: relative; overflow: hidden;">
-        <img src="projects/trace.jpg"
-          alt="Trace dashboard — administrator greeting, report an item, browse listings, my reports, claims and admin console cards"
-          loading="lazy" decoding="async">
+        <picture>
+          <source srcset="projects/trace.webp" type="image/webp">
+          <img src="projects/trace.jpg" width="1200" height="853"
+            alt="Trace dashboard — administrator greeting, report an item, browse listings, my reports, claims and admin console cards"
+            loading="lazy" decoding="async">
+        </picture>
       </div>
     </div>
 
@@ -2409,9 +2421,12 @@
     <div class="glass project-card card-3d">
       <div class="project-visual project-shot"
         style="height: 100%; min-height: 350px; background: rgba(6, 10, 20, 0.6); border-radius: 16px; border: 1px solid rgba(139,92,246,0.2); box-shadow: inset 0 0 50px rgba(0,0,0,0.18); position: relative; overflow: hidden;">
-        <img src="projects/edulens-ai.jpg"
-          alt="EduLens AI chat interface — conversation sidebar, model selector and prompt suggestions"
-          loading="lazy" decoding="async">
+        <picture>
+          <source srcset="projects/edulens-ai.webp" type="image/webp">
+          <img src="projects/edulens-ai.jpg" width="1200" height="626"
+            alt="EduLens AI chat interface — conversation sidebar, model selector and prompt suggestions"
+            loading="lazy" decoding="async">
+        </picture>
       </div>
 
       <div>
@@ -2455,9 +2470,12 @@
 
       <div class="project-visual project-shot"
         style="height: 100%; min-height: 350px; background: rgba(6, 10, 20, 0.6); border-radius: 16px; border: 1px solid rgba(236,72,153,0.2); box-shadow: inset 0 0 50px rgba(0,0,0,0.18); position: relative; overflow: hidden;">
-        <img src="projects/credit-profile.jpg"
-          alt="Credit Profile landing page — AI-powered credit intelligence headline with live score, score range and real-time update cards"
-          loading="lazy" decoding="async">
+        <picture>
+          <source srcset="projects/credit-profile.webp" type="image/webp">
+          <img src="projects/credit-profile.jpg" width="1200" height="626"
+            alt="Credit Profile landing page — AI-powered credit intelligence headline with live score, score range and real-time update cards"
+            loading="lazy" decoding="async">
+        </picture>
       </div>
     </div>
   </section>
@@ -3530,7 +3548,10 @@
                 ${link}
               </div>
               <figure class="cert-doc-shot">
-                <img src="${escapeHTML(d.image)}" alt="${title} certificate issued to Vikram Singh by ${issuer}" loading="lazy" decoding="async">
+                <picture>
+                  <source srcset="${escapeHTML(String(d.image).replace(/\.jpe?g$/i, '.webp'))}" type="image/webp">
+                  <img src="${escapeHTML(d.image)}" alt="${title} certificate issued to Vikram Singh by ${issuer}" loading="lazy" decoding="async">
+                </picture>
               </figure>
               <p class="cert-doc-note">Actual certificate document · ${issuer}</p>
             </div>`;
@@ -3714,7 +3735,7 @@
           openModal({
             kicker: 'Project · Full view',
             name: title,
-            html: `<div class="shot-full"><img src="${img.getAttribute('src')}" alt="${img.alt}"></div>`,
+            html: `<div class="shot-full"><img src="${img.currentSrc || img.getAttribute('src')}" alt="${img.alt}"></div>`,
             shot: true
           }, e);
         };
