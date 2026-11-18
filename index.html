@@ -1420,10 +1420,31 @@
       flex: 1 1 auto;
       min-height: 0;
       height: auto;
-      overflow: hidden;
-      gap: 0.7rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      gap: 1rem;
       padding: 0.9rem;
-      justify-content: center;
+      align-items: center;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+    }
+
+    .pdf-viewport.fit-page::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .pdf-viewport.fit-page::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .pdf-viewport.fit-page::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.22);
+      border-radius: 99px;
+    }
+
+    .pdf-viewport.fit-page::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.34);
     }
 
     @media (max-width: 768px) {
@@ -3619,13 +3640,13 @@
       function buildResumeShell() {
         return `
           <div class="pdf-toolbar">
-            <span class="pdf-meta" id="rv-meta">Fit to page</span>
+            <span class="pdf-meta" id="rv-meta">Fit to width</span>
             <span class="pdf-sep"></span>
             <span class="pdf-meta" id="rv-page">•</span>
             <span class="pdf-sep"></span>
             <a class="pdf-pill" href="https://docs.google.com/document/d/1XPWmjBpT9VAv2XP0i6pFRkJR-Y_n2NbN/edit?usp=sharing&ouid=112699414269592164020&rtpof=true&sd=true" target="_blank" rel="noopener">Google Doc ↗</a>
           </div>
-          <div class="pdf-viewport fit-page" id="rv-viewport">
+          <div class="pdf-viewport fit-page" id="rv-viewport" tabindex="0" aria-label="Resume document, scroll to read" data-lenis-prevent>
             <div class="pdf-loading">rendering resume…</div>
           </div>`;
       }
@@ -3634,6 +3655,15 @@
         const viewport = document.getElementById('rv-viewport');
         if (!viewport) return;
         const token = ++resumeToken;
+
+        // Lenis owns the page wheel and swallows events even while stopped, so
+        // drive this nested scroller directly instead of letting the gesture die.
+        viewport.addEventListener('wheel', (e) => {
+          if (viewport.scrollHeight <= viewport.clientHeight) return;
+          e.preventDefault();
+          e.stopPropagation();
+          viewport.scrollTop += e.deltaY;
+        }, { passive: false });
 
         // If PDF.js can't paint (blocked worker, file:// origin, frozen frames),
         // fall back to the browser's own viewer instead of an empty panel.
@@ -3646,7 +3676,7 @@
               <iframe src="Vikram_Singh_CV.pdf#view=FitH" title="Vikram Singh CV"></iframe>
               <span class="pdf-note">Reader fallback mode — the CV stays in-page.</span>
             </div>`;
-        }, 5000);
+        }, 9000);
 
         const pageMeta = document.getElementById('rv-page');
 
@@ -3666,47 +3696,65 @@
             pages.push({ page, base: page.getViewport({ scale: 1 }) });
           }
 
-          // One complete sheet, edge to edge: the scale is bound by BOTH axes,
-          // so the whole CV is visible at once and nothing ever needs scrolling.
-          const cs = getComputedStyle(viewport);
-          const padX = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
-          const padY = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
-          const gap = parseFloat(cs.rowGap) || 0;
-          const availW = Math.max(160, viewport.clientWidth - padX);
-          const availH = Math.max(160, viewport.clientHeight - padY - gap * (pages.length - 1));
+          // Fit to width: the sheet spans the glass edge to edge and the reader
+          // scrolls vertically, so the CV is read at a comfortable size.
           const widest = pages.reduce((m, p) => Math.max(m, p.base.width), 1);
-          const tallest = pages.reduce((h, p) => h + p.base.height, 0);
-          const scale = Math.min(availW / widest, availH / tallest);
+
+          const fitScale = () => {
+            const cs = getComputedStyle(viewport);
+            const padX = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+            return Math.max(200, viewport.clientWidth - padX - 8) / widest; // 8px scrollbar
+          };
+
+          // Paint off-DOM, then swap in one frame, so a refit never blanks the sheet.
+          const renderAt = async (scale, t) => {
+            const frag = document.createDocumentFragment();
+            for (let i = 0; i < pages.length; i++) {
+              const vp = pages[i].page.getViewport({ scale });
+
+              const wrap = document.createElement('div');
+              wrap.className = 'pdf-page';
+              wrap.innerHTML = `<div class="pdf-pagelabel">Page ${i + 1} / ${pages.length}</div>`;
+              const canvas = document.createElement('canvas');
+              canvas.width = Math.floor(vp.width * dpr);
+              canvas.height = Math.floor(vp.height * dpr);
+              canvas.style.width = Math.round(vp.width) + 'px';
+              canvas.style.height = Math.round(vp.height) + 'px';
+              wrap.appendChild(canvas);
+              frag.appendChild(wrap);
+
+              await pages[i].page.render({
+                canvasContext: canvas.getContext('2d'),
+                viewport: vp,
+                transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null
+              }).promise;
+              if (t !== resumeToken || !modalOpen) return null;
+              canvas.classList.add('ready');
+            }
+            return frag;
+          };
+
+          const firstSheet = await renderAt(fitScale(), token);
+          if (!firstSheet || token !== resumeToken || !modalOpen) return;
 
           viewport.innerHTML = '';
-          for (let i = 0; i < pages.length; i++) {
-            const page = pages[i].page;
-            const vp = page.getViewport({ scale });
-
-            const wrap = document.createElement('div');
-            wrap.className = 'pdf-page';
-            wrap.innerHTML = `<div class="pdf-pagelabel">Page ${i + 1} / ${pages.length}</div>`;
-            const canvas = document.createElement('canvas');
-            canvas.width = Math.floor(vp.width * dpr);
-            canvas.height = Math.floor(vp.height * dpr);
-            canvas.style.width = Math.round(vp.width) + 'px';
-            canvas.style.height = Math.round(vp.height) + 'px';
-            wrap.appendChild(canvas);
-            viewport.appendChild(wrap);
-
-            await page.render({
-              canvasContext: canvas.getContext('2d'),
-              viewport: vp,
-              transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null
-            }).promise;
-            canvas.classList.add('ready');
-          }
-
+          viewport.appendChild(firstSheet);
+          viewport.scrollTop = 0;
           clearTimeout(watchdog);
           window.rvDoc = doc;
           if (pageMeta) pageMeta.textContent = pages.length + (pages.length > 1 ? ' pages' : ' page');
-          // Refit the sheet when the window changes shape
-          window.rvRefit = () => bootResume();
+
+          // Refit the sheet when the window changes shape, keeping the reading spot.
+          window.rvRefit = async () => {
+            if (!modalOpen) return;
+            const t = ++resumeToken;
+            const ratio = viewport.scrollTop / Math.max(1, viewport.scrollHeight - viewport.clientHeight);
+            const sheet = await renderAt(fitScale(), t);
+            if (!sheet || t !== resumeToken || !modalOpen) return;
+            viewport.innerHTML = '';
+            viewport.appendChild(sheet);
+            viewport.scrollTop = ratio * Math.max(0, viewport.scrollHeight - viewport.clientHeight);
+          };
 
         } catch (err) {
           clearTimeout(watchdog);
