@@ -3445,7 +3445,13 @@
             {
               y: 0, scale: 1, rotateX: 0, opacity: 1,
               duration: fast ? 0.15 : 0.85, ease: 'expo.out',
-              onComplete: () => { modalAnimating = false; }
+              onComplete: () => {
+                modalAnimating = false;
+                // Land on an exact transform and drop the paint hint: a layer
+                // promoted at 0.9 scale can keep that soft raster afterwards.
+                gsap.set(modalPanel, { clearProps: 'transform' });
+                modalPanel.style.willChange = 'auto';
+              }
             });
 
           // Position-only stagger: content must never depend on an animation
@@ -3464,7 +3470,15 @@
           mountBody();
         });
         setTimeout(mountBody, fast ? 120 : 380);
-        setTimeout(() => { modalAnimating = false; }, fast ? 350 : 1200);
+        // Frame-independent settle: even if rAF is throttled, the sheet ends on
+        // an exact transform with no stale 0.9-scale paint hint left behind.
+        setTimeout(() => {
+          modalAnimating = false;
+          if (modalOpen) {
+            gsap.set(modalPanel, { clearProps: 'transform' });
+            modalPanel.style.willChange = 'auto';
+          }
+        }, fast ? 350 : 1200);
 
         modalCloseBtn.focus({ preventScroll: true });
       }
@@ -3474,6 +3488,7 @@
         modalAnimating = true;
         resumeToken++;
         const fast = REDUCED;
+        modalPanel.style.willChange = 'transform, opacity';
 
         gsap.to(modalPanel, {
           y: 46, scale: 0.94, rotateX: 6, opacity: 0,
@@ -3492,6 +3507,7 @@
           modalBody.innerHTML = '';
           modalPanel.classList.remove('is-resume');
           modalPanel.classList.remove('is-shot');
+          modalPanel.style.willChange = '';
           window.rvRefit = null;
           gsap.set(modalBackdrop, { opacity: 1, clearProps: 'opacity' });
           if (modalLastFocus && modalLastFocus.focus) modalLastFocus.focus({ preventScroll: true });
@@ -3640,7 +3656,9 @@
           const doc = await pdfjsLib.getDocument('Vikram_Singh_CV.pdf').promise;
           if (token !== resumeToken || !modalOpen) return;
 
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          // Supersample: render at 2x even on 1x displays so the page keeps
+          // crisp glyph edges once it is fitted down into the glass sheet.
+          const dpr = Math.min(3, Math.max(2, window.devicePixelRatio || 1));
           const pages = [];
           for (let p = 1; p <= doc.numPages; p++) {
             const page = await doc.getPage(p);
