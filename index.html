@@ -17,8 +17,9 @@
  */
 
     :root {
-      --bg: #150B3E;
-      /* Vivid Twilight — saturated color field so clear glass visibly refracts */
+      --bg: #04060C;
+      /* Obsidian Ink — near-black field so the clear glass edges, rims and
+         highlights have maximum contrast to refract against */
       --ink: #FFFFFF;
       --muted: #F2F5FF;
       /* Everything reads white — legibility first */
@@ -342,49 +343,93 @@
       inset: 0;
       z-index: -2;
       overflow: hidden;
+      /* Obsidian Aurora — black-teal base, tightly placed saturated pools so the
+         glass has bright edges and deep shadow in the same viewport */
       background:
-        radial-gradient(1200px 780px at 78% -6%, rgba(236, 72, 153, 0.34), transparent 62%),
-        radial-gradient(1000px 700px at 6% 104%, rgba(34, 211, 238, 0.3), transparent 62%),
-        radial-gradient(1100px 780px at 50% 55%, rgba(168, 85, 247, 0.24), transparent 65%),
-        linear-gradient(160deg, #150B3E 0%, #2A1055 34%, #43197B 58%, #0E2E5C 100%);
+        radial-gradient(1100px 760px at 82% -8%, rgba(45, 212, 191, 0.24), transparent 60%),
+        radial-gradient(960px 700px at 2% 104%, rgba(236, 72, 153, 0.2), transparent 62%),
+        radial-gradient(880px 660px at 46% 52%, rgba(99, 102, 241, 0.16), transparent 66%),
+        linear-gradient(168deg, #04060C 0%, #071120 32%, #06202A 58%, #03050A 100%);
     }
 
-    /* -- Aurora blobs hold a constant glow — velocity-pumped opacity reads as flicker -- */
-    .blob {
+    /* -- Tech surface: an engineering blueprint backdrop — fine grid lines and a
+       dot matrix drifting slowly, with a HUD scan line sweeping down the page.
+       Structural detail is what makes clear glass read as a pane. -- */
+    .tech-grid {
       position: absolute;
-      filter: blur(120px);
-      border-radius: 50%;
-      opacity: 0.35;
-      mix-blend-mode: screen;
+      inset: -8%;
+      background-image:
+        linear-gradient(rgba(125, 211, 252, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 211, 252, 0.09) 1px, transparent 1px);
+      background-size: 72px 72px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 74% at 50% 38%, #000 26%, transparent 76%);
+      mask-image: radial-gradient(ellipse 80% 74% at 50% 38%, #000 26%, transparent 76%);
       will-change: transform;
-      animation: float 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+      animation: gridDrift 28s linear infinite;
     }
 
-    .blob-1 {
-      width: 70vw;
-      height: 70vw;
-      background: var(--accent-1);
-      top: -20%;
+    .tech-dots {
+      position: absolute;
+      inset: -8%;
+      background-image: radial-gradient(rgba(45, 212, 191, 0.5) 1px, transparent 1.6px);
+      background-size: 24px 24px;
+      opacity: 0.5;
+      -webkit-mask-image:
+        radial-gradient(ellipse 62% 58% at 82% 18%, #000 10%, transparent 72%),
+        radial-gradient(ellipse 55% 52% at 12% 88%, #000 8%, transparent 70%);
+      mask-image:
+        radial-gradient(ellipse 62% 58% at 82% 18%, #000 10%, transparent 72%),
+        radial-gradient(ellipse 55% 52% at 12% 88%, #000 8%, transparent 70%);
+      will-change: transform;
+      animation: gridDrift 36s linear infinite reverse;
+    }
+
+    .tech-scan {
+      position: absolute;
       left: -10%;
-      animation-delay: 0s;
+      right: -10%;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(45, 212, 191, 0.55) 22%,
+          rgba(125, 211, 252, 0.9) 50%,
+          rgba(45, 212, 191, 0.55) 78%,
+          transparent 100%);
+      box-shadow: 0 0 60px 18px rgba(56, 189, 248, 0.12);
+      opacity: 0.7;
+      will-change: transform, opacity;
+      animation: scanSweep 19s cubic-bezier(0.45, 0, 0.55, 1) infinite;
     }
 
-    .blob-2 {
-      width: 60vw;
-      height: 60vw;
-      background: var(--accent-2);
-      bottom: -10%;
-      right: -20%;
-      animation-delay: -5s;
+    @keyframes gridDrift {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(-72px, -72px, 0);
+      }
     }
 
-    .blob-3 {
-      width: 50vw;
-      height: 50vw;
-      background: var(--accent-3);
-      top: 30%;
-      left: 30%;
-      animation-delay: -10s;
+    @keyframes scanSweep {
+      0% {
+        transform: translate3d(0, -8vh, 0);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.7;
+      }
+
+      85% {
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translate3d(0, 108vh, 0);
+        opacity: 0;
+      }
     }
 
     /* 
@@ -1158,6 +1203,9 @@
       .risk-bar-1,
       .risk-bar-2,
       .risk-bar-3,
+      .tech-grid,
+      .tech-dots,
+      .tech-scan,
       .noise-overlay,
       .scroll-badge .ring,
       .text-accent {
@@ -2088,9 +2136,9 @@
 
   <!-- Liquid Glass Background -->
   <div class="liquid-bg">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <div class="tech-grid"></div>
+    <div class="tech-dots"></div>
+    <div class="tech-scan"></div>
   </div>
   <div class="noise-overlay"></div>
 
@@ -3297,12 +3345,81 @@
           const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
           camera.position.z = 15;
 
-          // Elegant wireframe TorusKnot with Cyan color — lighter mesh so the
-          // backdrop can't become the frame-time bottleneck.
-          const geometry = new THREE.TorusKnotGeometry(5, 1.5, 90, 14);
-          const material = new THREE.MeshBasicMaterial({ color: 0x0EA5E9, wireframe: true, transparent: true, opacity: 0.25 });
-          const mesh = new THREE.Mesh(geometry, material);
-          scene.add(mesh);
+          // Network constellation — a shell of glowing nodes laced with short
+          // links, the visual shorthand for distributed systems. Sparse enough
+          // to stay readable behind the glass, and cheap: 96 nodes, static links.
+          const NODES = 96;
+          const nodePos = new Float32Array(NODES * 3);
+          const nodeCol = new Float32Array(NODES * 3);
+          const palette = [0x7DD3FC, 0x7DD3FC, 0x2DD4BF, 0xC4B5FD, 0xF9A8D4];
+          const golden = (3 - Math.sqrt(5)) * Math.PI;
+          const nodeColor = new THREE.Color();
+          const nodes = [];
+          for (let i = 0; i < NODES; i++) {
+            // Fibonacci sphere, radius jittered so it reads as a 3D cloud and not
+            // as a hollow shell of dots.
+            const y = 1 - (i / (NODES - 1)) * 2;
+            const ring = Math.sqrt(Math.max(0, 1 - y * y));
+            const theta = golden * i;
+            const radius = 6.2 + Math.random() * 4.4;
+            const node = new THREE.Vector3(
+              Math.cos(theta) * ring * radius,
+              y * radius * 0.88,
+              Math.sin(theta) * ring * radius
+            );
+            nodes.push(node);
+            nodePos[i * 3] = node.x;
+            nodePos[i * 3 + 1] = node.y;
+            nodePos[i * 3 + 2] = node.z;
+            nodeColor.setHex(palette[i % palette.length]);
+            nodeCol[i * 3] = nodeColor.r;
+            nodeCol[i * 3 + 1] = nodeColor.g;
+            nodeCol[i * 3 + 2] = nodeColor.b;
+          }
+
+          const nodeGeo = new THREE.BufferGeometry();
+          nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePos, 3));
+          nodeGeo.setAttribute('color', new THREE.BufferAttribute(nodeCol, 3));
+          const nodeMat = new THREE.PointsMaterial({
+            size: 0.13,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.9,
+            sizeAttenuation: true,
+            depthWrite: false
+          });
+          const nodeCloud = new THREE.Points(nodeGeo, nodeMat);
+
+          // Only near neighbours are joined — a static table, because the whole
+          // constellation rotates as one group so the relative geometry is fixed.
+          const links = [];
+          for (let a = 0; a < NODES; a++) {
+            for (let b = a + 1; b < NODES; b++) {
+              if (nodes[a].distanceTo(nodes[b]) < 3.7) links.push(a, b);
+            }
+          }
+          const linkPos = new Float32Array(links.length * 3);
+          for (let k = 0; k < links.length; k++) {
+            const node = nodes[links[k]];
+            linkPos[k * 3] = node.x;
+            linkPos[k * 3 + 1] = node.y;
+            linkPos[k * 3 + 2] = node.z;
+          }
+
+          const linkGeo = new THREE.BufferGeometry();
+          linkGeo.setAttribute('position', new THREE.BufferAttribute(linkPos, 3));
+          const linkMat = new THREE.LineBasicMaterial({
+            color: 0x2DD4BF,
+            transparent: true,
+            opacity: 0.17,
+            depthWrite: false
+          });
+          const linkMesh = new THREE.LineSegments(linkGeo, linkMat);
+
+          const network = new THREE.Group();
+          network.add(linkMesh, nodeCloud);
+          network.rotation.set(0.2, -0.5, 0.06);
+          scene.add(network);
 
           window.addEventListener('resize', () => {
             renderDpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -3310,11 +3427,6 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-          });
-
-          gsap.to(mesh.rotation, {
-            y: Math.PI * 3, x: Math.PI * 1.5,
-            scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.5 }
           });
 
           // The backdrop is ambient, so it paints at ~60fps while the rest of
@@ -3328,7 +3440,11 @@
             const frames = Math.min(3, delta * 60);
             lastPaint = time;
 
-            mesh.rotation.z += (0.001 + Math.min(Math.abs(scrollVel) * 0.0004, 0.02)) * frames;
+            network.rotation.y += (0.0011 + Math.min(Math.abs(scrollVel) * 0.00035, 0.016)) * frames;
+            // Tilt and roll breathe instead of tumbling, so the cloud always
+            // presents a readable silhouette rather than an edge-on line.
+            network.rotation.x = 0.2 + Math.sin(time * 0.16) * 0.13;
+            network.rotation.z = 0.06 + Math.cos(time * 0.12) * 0.09;
             const targetZ = 15 - Math.min(Math.abs(scrollVel) * 0.06, 1.4);
             camera.position.z += (targetZ - camera.position.z) * (1 - Math.pow(1 - 0.07, frames));
             renderer.render(scene, camera);
