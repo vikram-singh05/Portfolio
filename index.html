@@ -248,90 +248,268 @@
     }
 
     /* 
- * SCARY LOADER
+ * 0. LOADER — the name fills with light as the first paint settles
  */
-    #hacker-loader {
+    #loader {
       position: fixed;
       inset: 0;
-      background-color: rgba(10, 14, 40, 0.55);
-      backdrop-filter: saturate(160%);
-      -webkit-backdrop-filter: saturate(160%);
-      background-image: radial-gradient(circle at center, rgba(14, 165, 233, 0.05) 0%, rgba(2, 4, 20, 0.6) 100%);
-      color: var(--accent-1);
-      /* Electric Cyan instead of basic green */
       z-index: 9999999;
       display: flex;
-      flex-direction: column-reverse;
-      padding: 4vw;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1);
-      box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.55);
+      padding: 6vw;
+      background:
+        radial-gradient(58% 52% at 50% 46%, rgba(125, 211, 252, 0.1), transparent 72%),
+        rgba(4, 6, 12, 0.8);
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    #hacker-loader::before {
+    /* A single grazing highlight across the veil, like light over glass */
+    #loader::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(0deg,
-          rgba(14, 165, 233, 0.05),
-          rgba(14, 165, 233, 0.05) 1px,
-          transparent 1px,
-          transparent 2px);
+      background: linear-gradient(118deg, transparent 36%, rgba(255, 255, 255, 0.045) 50%, transparent 64%);
       pointer-events: none;
-      z-index: 1;
     }
 
-    .loader-hidden {
+    .loader-bloom {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(86vw, 980px);
+      aspect-ratio: 1.7;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(50% 50% at 50% 50%,
+          rgba(125, 211, 252, 0.28) 0%,
+          rgba(196, 181, 253, 0.16) 42%,
+          transparent 72%);
+      filter: blur(30px);
+      opacity: calc(0.2 + var(--p, 0) * 0.8);
+      pointer-events: none;
+    }
+
+    /* The veil is frosted glass over the live page, so the hero headline would
+       ghost through it as a soft block sitting behind the name. It mounts with
+       the loader handoff instead. */
+    #loader:not(.loader-done)~section .hero-content {
+      /* visibility, not opacity: the hero fade is a GSAP scrub tween that reads
+         its start value on init */
+      visibility: hidden;
+    }
+
+    .loader-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1240px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.3rem, 2.6vw, 2rem);
+    }
+
+    .loader-word {
+      position: relative;
+      width: max-content;
+      max-width: 100%;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.85rem, 8.2vw, 7.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+      /* Held invisible until the Unbounded face is in place, so the word never
+         changes shape after the pour has started */
+      opacity: 0;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s ease, opacity 0.55s ease;
+    }
+
+    /* opacity: 1 is the resting value the entrance animates up to; the keyframes
+       only describe where it comes from */
+    #loader.is-typed .loader-word {
+      opacity: 1;
+      animation: loaderWordIn 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .loader-word span {
+      display: block;
+    }
+
+    /* Empty glass outline, then a coloured pour rising inside it */
+    .loader-word-base {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.26);
+    }
+
+    .loader-word-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      /* Extra room below the line box so the g's tail survives the mask */
+      padding-bottom: 0.34em;
+      color: transparent;
+      background-image: linear-gradient(100deg, #8AE9FF 0%, #7DD3FC 30%, #C4B5FD 64%, #F9A8D4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* Measured in em against the line box, not the padded box, so the pour
+         reaches the baseline at 100% */
+      clip-path: inset(calc((1 - var(--p, 0)) * 1.04em) 0 0 0);
+    }
+
+    .loader-word-shine {
+      position: absolute;
+      inset: 0;
+      color: transparent;
+      background-image: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.85) 50%, transparent 60%);
+      background-size: 280% 100%;
+      background-position: 190% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.32;
+      animation: loaderShine 3.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .loader-meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-top: clamp(0.9rem, 1.8vw, 1.4rem);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.6rem, 1vw, 0.7rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(242, 245, 255, 0.6);
+      opacity: 0;
+    }
+
+    #loader.is-typed .loader-meta {
+      opacity: 1;
+      animation: loaderMetaIn 0.9s 0.35s both;
+    }
+
+    .loader-label::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      margin-right: 0.7em;
+      border-radius: 50%;
+      vertical-align: middle;
+      background: var(--accent-1);
+      box-shadow: 0 0 10px rgba(125, 211, 252, 0.9);
+      animation: loaderPulse 1.5s ease-in-out infinite;
+    }
+
+    .loader-count {
+      color: rgba(242, 245, 255, 0.9);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.12em;
+    }
+
+    .loader-count i {
+      font-style: normal;
+      opacity: 0.45;
+      margin-left: 0.12em;
+    }
+
+    /* The wordmark is the loader, so it keeps its presence on phones instead of
+       shrinking to a caption */
+    @media (max-width: 560px) {
+      .loader-word {
+        font-size: min(10.5vw, 3.6rem);
+      }
+
+      .loader-meta {
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+      }
+    }
+
+    #loader.is-complete .loader-count {
+      color: #fff;
+    }
+
+    #loader.loader-done {
       opacity: 0;
       pointer-events: none;
     }
 
-    .terminal {
-      max-width: 900px;
-      width: 100%;
-      position: relative;
-      z-index: 2;
+    #loader.loader-done .loader-word {
+      transform: translateY(-0.5rem) scale(1.03);
+      opacity: 0;
     }
 
-    #log-container p {
-      margin: 0.3rem 0;
-      color: #ccc;
-      font-size: inherit;
-      line-height: 1.4;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    #loader.loader-done .loader-meta {
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    #log-container p.success {
-      color: #0EA5E9;
-      text-shadow: 0 0 10px #0EA5E9;
-    }
-
-    #log-container p.error {
-      color: #FF003C;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    #log-container p.warning {
-      color: #F59E0B;
-      text-shadow: 0 0 10px #F59E0B;
-    }
-
-    .cursor-blink {
-      animation: blink 1s step-end infinite;
-      display: inline-block;
-      width: 12px;
-      height: 1.2em;
-      background: var(--ink);
-      vertical-align: middle;
-      margin-left: 5px;
-    }
-
-    @keyframes blink {
-      50% {
+    /* Opacity and lift only: a blur filter here rasterises the word's box and
+       leaves a soft plate around the name */
+    @keyframes loaderWordIn {
+      from {
         opacity: 0;
+        transform: translateY(26px);
+      }
+    }
+
+    @keyframes loaderMetaIn {
+      from {
+        opacity: 0;
+      }
+    }
+
+    @keyframes loaderShine {
+      0% {
+        background-position: 190% 0;
+      }
+
+      45%,
+      100% {
+        background-position: -90% 0;
+      }
+    }
+
+    @keyframes loaderPulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .loader-word,
+      .loader-meta,
+      .loader-label::before,
+      .loader-word-shine,
+      #loader.is-typed .loader-word,
+      #loader.is-typed .loader-meta {
+        animation: none !important;
+      }
+
+      /* With the entrance disabled the word still has to be revealed */
+      #loader.is-typed .loader-word,
+      #loader.is-typed .loader-meta {
+        opacity: 1;
+      }
+
+      #loader.loader-done .loader-word {
+        transform: none;
+        filter: none;
       }
     }
 
@@ -2067,10 +2245,18 @@
   <div class="scroll-progress"><span id="progress-bar"></span></div>
 
   <!-- Loader Screen -->
-  <div id="hacker-loader">
-    <div class="terminal">
-      <div id="log-container"></div>
-      <div style="display: flex;"><span class="cursor-blink"></span></div>
+  <div id="loader" aria-hidden="true">
+    <div class="loader-bloom"></div>
+    <div class="loader-inner">
+      <div class="loader-word">
+        <span class="loader-word-base">Vikram Singh</span>
+        <span class="loader-word-fill">Vikram Singh</span>
+        <span class="loader-word-shine">Vikram Singh</span>
+      </div>
+      <div class="loader-meta">
+        <span class="loader-label" id="loader-label">Loading assets</span>
+        <span class="loader-count"><span id="loader-count">000</span><i>%</i></span>
+      </div>
     </div>
   </div>
 
@@ -2718,95 +2904,137 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      // 0. LOADER — a short asset log while the first paint settles
-      const loaderLogs = [
-        { text: "vikram@singh ~ % serve portfolio", delay: 700 },
-        { text: "resolving assets", delay: 400 },
-        { text: "fonts · Unbounded, Figtree, JetBrains Mono", delay: 500 },
-        { text: "images · trace, edulens-ai, credit-profile", delay: 500 },
-        { text: "credentials · five records linked", delay: 450 },
-        { text: "painting glass", delay: 450 },
-        { text: "ready in 1.2s", delay: 500, type: 'success' }
+      // 0. LOADER — the name fills with light while the first paint settles
+      const loader = document.getElementById('loader');
+      const loaderLabel = document.getElementById('loader-label');
+      const loaderCount = document.getElementById('loader-count');
+      const loaderStages = [
+        [0, 'Loading assets'],
+        [0.34, 'Composing the page'],
+        [0.7, 'Polishing the glass'],
+        [0.99, 'Ready']
       ];
 
-      const logContainer = document.getElementById('log-container');
-      const loader = document.getElementById('hacker-loader');
+      let loaderStage = 0;
+      let loaderFinished = false;
+
+      function renderLoader(value) {
+        loader.style.setProperty('--p', value.toFixed(4));
+        loaderCount.textContent = String(Math.round(value * 100)).padStart(3, '0');
+
+        const nextStage = loaderStages.reduce((idx, [at], n) => (value >= at ? n : idx), 0);
+        if (nextStage !== loaderStage) {
+          loaderStage = nextStage;
+          loaderLabel.textContent = loaderStages[nextStage][1];
+        }
+      }
 
       document.body.style.overflow = 'hidden';
+      renderLoader(0);
 
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+      // Steady climb to 92%, then wait for fonts + assets and top it off.
+      const loaderBootTime = 2000;
+      const loaderSettleTime = 420;
+      const loaderHold = 520;
 
-      function scrambleText(element, finalString, duration, callback) {
-        let iteration = 0;
-        const maxIterations = finalString.length;
-        if (maxIterations === 0) {
-          element.innerText = finalString;
-          if (callback) callback();
+      const loaderAssets = Promise.all([
+        document.fonts ? document.fonts.ready : Promise.resolve(),
+        document.readyState === 'complete'
+          ? Promise.resolve()
+          : new Promise((resolve) => window.addEventListener('load', resolve, { once: true }))
+      ]);
+
+      /* The wordmark is set in Unbounded. On a cold load that face can swap in a
+         beat after first paint, which used to resize the outline while the pour
+         was already climbing. Hold the word until the face is loaded (or a short
+         grace period passes), then start the run. */
+      const loaderFont = document.fonts && document.fonts.load
+        ? document.fonts.load('800 1em "Unbounded"').catch(() => {})
+        : Promise.resolve();
+
+      let loaderStarted = false;
+      let loaderStart = 0;
+
+      function finishLoader() {
+        if (loaderFinished) return;
+        loaderFinished = true;
+        renderLoader(1);
+        loader.classList.add('is-complete');
+
+        setTimeout(() => {
+          loader.classList.add('loader-done');
+          document.body.style.overflow = '';
+          lenis.start();
+          ScrollTrigger.refresh();
+
+          // Initial Mount Animations
+          gsap.to('#main-nav', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
+
+          gsap.from('.reveal-line', {
+            y: 100, rotateX: -45, opacity: 0,
+            duration: 1, stagger: 0.1, ease: 'power3.out', transformOrigin: '0% 50% -50'
+          });
+
+          gsap.from('.gsap-btn-stagger .magnetic-container', {
+            y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.5
+          });
+
+          gsap.from('.scroll-badge', {
+            scale: 0, opacity: 0, duration: 1.1, ease: 'back.out(1.6)', delay: 0.9
+          });
+
+        }, loaderHold);
+
+        setTimeout(() => loader.remove(), 1900);
+      }
+
+      function loaderTick(now) {
+        if (loaderFinished) return;
+        const t = Math.min(1, (now - loaderStart) / loaderBootTime);
+        renderLoader((1 - Math.pow(1 - t, 3)) * 0.92);
+
+        if (t < 1) {
+          requestAnimationFrame(loaderTick);
           return;
         }
-        const interval = Math.max(10, duration / maxIterations);
 
-        const scrambleInterval = setInterval(() => {
-          element.innerText = finalString.split('').map((char, index) => {
-            if (index < iteration) return char;
-            if (char === ' ') return ' ';
-            return chars[Math.floor(Math.random() * chars.length)];
-          }).join('');
+        loaderAssets.then(() => {
+          if (loaderFinished) return;
+          const from = performance.now();
 
-          iteration += 1.5;
+          const settle = (stamp) => {
+            if (loaderFinished) return;
+            const k = Math.min(1, (stamp - from) / loaderSettleTime);
+            renderLoader(0.92 + 0.08 * (1 - Math.pow(1 - k, 3)));
+            if (k < 1) requestAnimationFrame(settle);
+            else finishLoader();
+          };
 
-          if (iteration >= maxIterations) {
-            clearInterval(scrambleInterval);
-            element.innerText = finalString;
-            if (callback) callback();
-          }
-        }, interval);
+          requestAnimationFrame(settle);
+        });
       }
 
-      let i = 0;
-      function processLog() {
-        if (i < loaderLogs.length) {
-          const log = loaderLogs[i];
-          const p = document.createElement('p');
-          if (log.type) p.classList.add(log.type);
-          logContainer.appendChild(p);
-
-          const scrambleTime = Math.min(log.delay - 50, 200);
-
-          scrambleText(p, log.text, scrambleTime, () => {
-            i++;
-            setTimeout(processLog, Math.max(50, log.delay - scrambleTime));
-          });
-        } else {
-          setTimeout(() => {
-            loader.classList.add('loader-hidden');
-            document.body.style.overflow = '';
-            lenis.start();
-            ScrollTrigger.refresh();
-
-            // Initial Mount Animations
-            gsap.to('#main-nav', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
-
-            gsap.from('.reveal-line', {
-              y: 100, rotateX: -45, opacity: 0,
-              duration: 1, stagger: 0.1, ease: 'power3.out', transformOrigin: '0% 50% -50'
-            });
-
-            gsap.from('.gsap-btn-stagger .magnetic-container', {
-              y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.5
-            });
-
-            gsap.from('.scroll-badge', {
-              scale: 0, opacity: 0, duration: 1.1, ease: 'back.out(1.6)', delay: 0.9
-            });
-
-          }, 800);
-        }
+      function startLoader() {
+        if (loaderStarted || loaderFinished) return;
+        loaderStarted = true;
+        loader.classList.add('is-typed');
+        loaderStart = performance.now();
+        requestAnimationFrame(loaderTick);
       }
+
+      // Kick the run off first, so nothing further down can strand the veil
+      Promise.race([
+        loaderFont,
+        new Promise((resolve) => setTimeout(resolve, 900))
+      ]).then(startLoader);
 
       // Set initial states before loader finishes
       gsap.set('#main-nav', { y: -50, opacity: 0 });
-      setTimeout(processLog, 400);
+
+      // Never hold the page hostage to a slow font or image
+      setTimeout(() => {
+        if (!loaderFinished) finishLoader();
+      }, 6000);
 
       // Initialize GSAP
       gsap.registerPlugin(ScrollTrigger);
